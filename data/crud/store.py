@@ -1,4 +1,7 @@
 from .. import schemas
+from .source import JSON_DIRECTORY
+
+JSON_FILE = JSON_DIRECTORY / "stores.json"
 
 
 async def create(store: schemas.Store):
