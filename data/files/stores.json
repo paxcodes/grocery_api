@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Wunsch and Sons",
+        "founding_year": 2010,
+        "is_active": false
+    },
+    {
+        "id": 2,
+        "name": "Shanahan-Langosh",
+        "founding_year": 2013,
+        "is_active": true
+    },
+    {
+        "id": 3,
+        "name": "Dickens Inc",
+        "founding_year": 2009,
+        "is_active": false
+    },
+    {
+        "id": 4,
+        "name": "Mraz and Sons",
+        "founding_year": 2006,
+        "is_active": false
+    },
+    {
+        "id": 5,
+        "name": "Hermiston-Runte",
+        "founding_year": 2011,
+        "is_active": false
+    }
+]

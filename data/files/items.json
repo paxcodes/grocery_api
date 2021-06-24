@@ -1,0 +1,107 @@
+[
+    {
+        "id": 1,
+        "name": "Dc - Sakura Fu",
+        "price": 3.1,
+        "is_active": true,
+        "tags": null
+    },
+    {
+        "id": 2,
+        "name": "Soup - Campbells, Classic Chix",
+        "price": 44.81,
+        "is_active": false,
+        "tags": null
+    },
+    {
+        "id": 3,
+        "name": "Wine - Manischewitz Concord",
+        "price": 98.96,
+        "is_active": false,
+        "tags": null
+    },
+    {
+        "id": 4,
+        "name": "Nougat - Paste / Cream",
+        "price": 75.76,
+        "is_active": true,
+        "tags": null
+    },
+    {
+        "id": 5,
+        "name": "Wine - White, Gewurtzraminer",
+        "price": 55.7,
+        "is_active": false,
+        "tags": null
+    },
+    {
+        "id": 6,
+        "name": "Eel - Smoked",
+        "price": 10.18,
+        "is_active": false,
+        "tags": null
+    },
+    {
+        "id": 7,
+        "name": "Pernod",
+        "price": 39.92,
+        "is_active": false,
+        "tags": null
+    },
+    {
+        "id": 8,
+        "name": "Cheese - Mozzarella",
+        "price": 78.69,
+        "is_active": false,
+        "tags": null
+    },
+    {
+        "id": 9,
+        "name": "Bread - Dark Rye",
+        "price": 13.63,
+        "is_active": false,
+        "tags": null
+    },
+    {
+        "id": 10,
+        "name": "Raspberries - Frozen",
+        "price": 68.31,
+        "is_active": false,
+        "tags": null
+    },
+    {
+        "id": 11,
+        "name": "Bar Bran Honey Nut",
+        "price": 33.84,
+        "is_active": true,
+        "tags": null
+    },
+    {
+        "id": 12,
+        "name": "Arctic Char - Fillets",
+        "price": 28.26,
+        "is_active": true,
+        "tags": null
+    },
+    {
+        "id": 13,
+        "name": "Cheese - Swiss Sliced",
+        "price": 71.56,
+        "is_active": true,
+        "tags": null
+    },
+    {
+        "id": 14,
+        "name": "Anchovy In Oil",
+        "price": 93.8,
+        "is_active": false,
+        "tags": null
+    },
+    {
+        "id": 15,
+        "name": "Mushroom - Shitake, Fresh",
+        "price": 36.5,
+        "is_active": true,
+        "tags": null
+    }
+]
