@@ -2,8 +2,8 @@ from pathlib import Path
 
 from pytest import mark, fixture
 
-from data import schemas
-from data.crud import item
+from grocery_api.data import schemas
+from grocery_api.data.crud import item
 
 from .json_dir import TEST_JSON_DIR
 

@@ -1,7 +1,7 @@
-from data.schemas import user as user_schema
+from grocery_api.data.schemas import user as user_schema
 from pytest import fixture
 
-from data.crud import user as user_crud
+from grocery_api.data.crud import user as user_crud
 
 from .json_dir import TEST_JSON_DIR
 
