@@ -26,6 +26,10 @@ From the other packages in the standard library:
 - `enum.Enum` (`from enum import Enum`)
 
 
+Pydantic Types ([docs](https://pydantic-docs.helpmanual.io/usage/types/))
+
+- Email addresses (`EmailStr`) - requires [email-validator](https://github.com/JoshData/python-email-validator) to be installed as mentioned in the pydantic [docs](https://pydantic-docs.helpmanual.io/usage/types/).
+
 Other types from the `typing` package commonly used: 
 
 - `Union` (e.g. `Union[int, str]` - can be either an `int` or `str`)
