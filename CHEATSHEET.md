@@ -23,8 +23,8 @@ From the `typing` package:
 
 From the other packages in the standard library: 
 
-- `enum.Enum` (`from enum import Enum`)
-
+- `from enum import Enum` - Limit the variable to predefined values
+- `from decimal import Decimal` - When precision is important (e.g. prices)
 
 Pydantic Types ([docs](https://pydantic-docs.helpmanual.io/usage/types/))
 
