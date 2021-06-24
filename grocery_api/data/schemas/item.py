@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import Set
+from typing import Set, Optional
 
 from pydantic import BaseModel
 
@@ -9,4 +9,4 @@ class Item(BaseModel):
     name: str
     price: Decimal
     is_active: bool
-    tags: Set[str]
+    tags: Optional[Set[str]]
