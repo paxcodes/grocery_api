@@ -1,37 +1,37 @@
-[
-    {
+{
+    "1": {
         "id": 1,
         "name": "Salt & Pax-pper",
         "price": 3.1,
         "is_active": true,
         "tags": null
     },
-    {
+    "2": {
         "id": 2,
         "name": "Sean's Soup - Campbells, Classic Chix",
         "price": 44.81,
         "is_active": false,
         "tags": null
     },
-    {
+    "3": {
         "id": 3,
         "name": "Wine - Manischewitz Concord",
         "price": 98.96,
         "is_active": false,
         "tags": null
     },
-    {
+    "4": {
         "id": 4,
         "name": "Nougat - Paste / Cream",
         "price": 75.76,
         "is_active": true,
         "tags": null
     },
-    {
+    "5": {
         "id": 5,
         "name": "Wine - White, Gewurtzraminer",
         "price": 55.7,
         "is_active": false,
         "tags": null
     }
-]
+}
