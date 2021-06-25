@@ -1,7 +1,7 @@
 from pydantic import UUID4
 
-from .. import schemas
-from .source import JSON_DIRECTORY
+from grocery_api.data import schemas
+from grocery_api.data.crud.source import JSON_DIRECTORY
 
 JSON_FILE = JSON_DIRECTORY / "users.json"
 
