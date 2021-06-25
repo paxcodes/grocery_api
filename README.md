@@ -24,18 +24,20 @@ The initial repository for PyLadies Hamburg's "Introduction to FastAPI" workshop
    * ✅ Running `which pip` and `which python` should output the `.venv` directory inside your `grocery_api` folder. (e.g. `/grocery_api/.venv/bin/pip` and `/grocery_api/.venv/bin/python`)
    * ✅ Running `python --version` should output 3.8/3.9. If it isn't, see ✅ on Step#3.
 5) Install dependencies: `pip install -r requirements.txt`
-   * ✅ It should something like, `Successfully installed ... fastapi-0.65.2 ... uvicorn-0.14.0 ... pytest-6.2.4 ... requests-2.25.1`
-   * 💡 The requirements.txt is the result when freezing dependencies after installing `fastapi` and `uvicorn`.
-6) Run the server: `uvicorn main:app`
+   * ✅ It should output something like, `Successfully installed ... fastapi-0.65.2 ... uvicorn-0.14.0 ... pytest-6.2.4 ... requests-2.25.1`
+   * 💡 The requirements.txt is the result when freezing dependencies after installing `fastapi`, `uvicorn`, `pytest`, and others.
+6) Install the project: `pip install -e .`
+   * 💡 This will install the grocery_api package locally. This is necessary to do for `pytest` to work.
+7) Run the server: `uvicorn main:app`
    * ✅ It should say,
     ```sh
     INFO:     Application startup complete.
     INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
     ```
-7) Go to your browser and visit, http://127.0.0.1:8000
+8) Go to your browser and visit, http://127.0.0.1:8000
    * ✅ It should say, `{ "message": "Hello World!" }`
-8) Exit the server by pressing `Ctrl+C` in the terminal.
-9) Run test: `python -m pytest` 
+9)  Exit the server by pressing `Ctrl+C` in the terminal.
+10) Run test: `python -m pytest` 
     * ✅ It should output,
       ```
       ...
