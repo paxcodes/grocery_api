@@ -1,4 +1,4 @@
-from pytest import mark, fixture
+from pytest import mark, fixture, raises
 
 from grocery_api.data import schemas
 from grocery_api.data.crud import item as item_crud
@@ -52,6 +52,11 @@ async def test_it_can_read_item_by_id():
     assert actual_item == expected_item
 
 
+async def test_read_returns_none_when_item_does_not_exist():
+    actual_item = await item_crud.read(100)
+    assert actual_item is None
+
+
 @fixture
 async def given_item() -> schemas.ItemOut:
     item_id = 1
@@ -83,6 +88,20 @@ async def test_it_can_update_item(given_item: schemas.ItemOut):
     assert actual_item == expected_item
 
 
+async def test_update_returns_none_when_item_does_not_exist():
+    actual_item = await item_crud.update(
+        100,
+        schemas.ItemBase(
+            **{
+                "name": "Saltz & Pax-pper",
+                "price": 2.5,
+                "is_active": True,
+            }
+        ),
+    )
+    assert actual_item is None
+
+
 async def test_it_can_update_item_tags(given_item: schemas.ItemOut):
     given_new_tags = {"pantry"}
 
@@ -93,8 +112,26 @@ async def test_it_can_update_item_tags(given_item: schemas.ItemOut):
     assert actual_item == expected_item
 
 
+async def test_update_tags_returns_none_when_item_does_not_exist():
+    actual_item = await item_crud.update_tags(
+        100,
+        {"pantry"},
+    )
+    assert actual_item is None
+
+
 async def test_it_can_delete_item_by_id(given_item: schemas.ItemOut):
     await item_crud.delete(given_item.id)
     actual_item = await item_crud.read(given_item.id)
 
     assert actual_item is None
+
+
+async def test_delete_raises_an_exception_when_item_does_not_exist():
+    given_item_id = 100
+
+    with raises(ValueError) as exc_info:
+        await item_crud.delete(given_item_id)
+        exc_msg = str(exc_info.value)
+
+    assert f"Item {given_item_id} does not exist" in exc_msg
