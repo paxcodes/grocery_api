@@ -30,14 +30,26 @@ async def read(item_id: int) -> Optional[schemas.ItemOut]:
 async def update(item_id: int, item: schemas.ItemBase) -> Optional[schemas.ItemOut]:
     """Updates (replaces) a grocery item given a full representation of the item."""
     json_data = await _utils.read_json_data(JSON_FILE)
-    json_data[str(item_id)] = {**{"id": item_id}, **jsonable_encoder(item)}
+    if str(item_id) not in json_data:
+        return None
+
+    updated_item_data = {**{"id": item_id}, **jsonable_encoder(item)}
+    json_data[str(item_id)] = updated_item_data
+
     await _utils.write_json_data(json_data, JSON_FILE)
+    return schemas.ItemOut(**updated_item_data)
 
 
 async def update_tags(
     item_id: int, tags: Optional[Set[str]]
 ) -> Optional[schemas.ItemOut]:
-    pass
+    json_data = await _utils.read_json_data(JSON_FILE)
+    if str(item_id) not in json_data:
+        return None
+
+    json_data[str(item_id)]["tags"] = jsonable_encoder(tags)
+    await _utils.write_json_data(json_data, JSON_FILE)
+    return schemas.ItemOut(**json_data[str(item_id)])
 
 
 async def delete(item_id: int) -> None:
