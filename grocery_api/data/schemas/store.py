@@ -6,3 +6,4 @@ class Store(BaseModel):
     name: str
     founding_year: int
     is_active: bool
+    parent_company: Optional[str]
