@@ -25,7 +25,7 @@ async def created_item() -> schemas.ItemOut:
     await item_crud.delete(actual_new_item.id)
 
 
-async def test_create_item(created_item: schemas.ItemOut):
+async def test_it_can_create_item(created_item: schemas.ItemOut):
     actual_new_item = await item_crud.read(created_item.id)
     assert actual_new_item == schemas.ItemOut(
         **{
@@ -38,7 +38,7 @@ async def test_create_item(created_item: schemas.ItemOut):
     )
 
 
-async def test_read_item_by_id():
+async def test_it_can_read_item_by_id():
     actual_item = await item_crud.read(1)
     expected_item = schemas.ItemOut(
         **{
@@ -61,7 +61,7 @@ async def given_item() -> schemas.ItemOut:
     await item_crud.update(item_id, original_item)
 
 
-async def test_update_item(given_item: schemas.ItemOut):
+async def test_it_can_update_item(given_item: schemas.ItemOut):
     given_new_data = {
         "name": "Saltz & Pax-pper",
         "price": 2.5,
@@ -83,7 +83,7 @@ async def test_update_item(given_item: schemas.ItemOut):
     assert actual_item == expected_item
 
 
-async def test_update_item_tags(given_item: schemas.ItemOut):
+async def test_it_can_update_item_tags(given_item: schemas.ItemOut):
     given_new_tags = {"pantry"}
 
     await item_crud.update_tags(given_item.id, given_new_tags)
@@ -93,7 +93,7 @@ async def test_update_item_tags(given_item: schemas.ItemOut):
     assert actual_item == expected_item
 
 
-async def test_delete_item_by_id(given_item: schemas.ItemOut):
+async def test_it_can_delete_item_by_id(given_item: schemas.ItemOut):
     await item_crud.delete(given_item.id)
     actual_item = await item_crud.read(given_item.id)
 
