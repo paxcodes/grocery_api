@@ -7,15 +7,6 @@ JSON_FILE = JSON_DIRECTORY / "items.json"
 
 
 async def create(item: schemas.ItemBase) -> schemas.ItemOut:
-    """Creates a grocery item.
-
-    Args:
-        item (ItemBase): A pydantic schema with the properties: name, price,
-            is_active, tags.
-
-    Returns:
-        ItemOut: The item created with properties: id, name, price, is_active, tags
-    """
     pass
 
 
@@ -24,16 +15,7 @@ async def read(item_id: int) -> Optional[schemas.ItemOut]:
 
 
 async def update(item_id: int, item: schemas.ItemBase) -> Optional[schemas.ItemOut]:
-    """Updates a grocery item given a full representation of the item.
-
-    Args:
-        item (ItemBase): A pydantic schema with the properties: name, price,
-            is_active, tags
-
-    Returns:
-        ItemOut: The item, including the `id` with updated attributes: name, price,
-            is_active, tags
-    """
+    """Updates (replaces) a grocery item given a full representation of the item."""
     pass
 
 
@@ -44,4 +26,12 @@ async def update_tags(
 
 
 async def delete(item_id: int) -> None:
+    """Deletes an item with the given {item_id}.
+
+    Args:
+        item_id (int): The ID of the item.
+
+    Raises:
+        ValueError - If {item_id} does not exist.
+    """
     pass
