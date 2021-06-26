@@ -10,7 +10,7 @@ The [setup instructions](#setup) assumes you already have the following:
 - Git
 - A code editor (I'll be using VS Code but use whatever most convenient for you)
 
-## Setup
+## Setup<sup>[1](#myfootnote1)</sup>
 
 1) Clone this repository  
    a) In your terminal, execute `git clone http://github.com/paxcodes/grocery_api`  
@@ -23,7 +23,7 @@ The [setup instructions](#setup) assumes you already have the following:
 
       ![.venv folder should be present](readme_assets/checklist_venv_folder.png)
 
-3) Activate your virtual environment: `source .venv/bin/activate`
+3) Activate your virtual environment: `source .venv/bin/activate` <sup>[2](#myfootnote2)</sup>
    * ✅ Your terminal prompt will be prefixed with `(grocery_api)` once the virtual environment is activated.
    * ✅ Running `which pip` and `which python` should output the `.venv` directory inside your `grocery_api` folder. (e.g. `/grocery_api/.venv/bin/pip` and `/grocery_api/.venv/bin/python`)
    * ✅ Running `python --version` should output 3.8/3.9. If it isn't, delete your `.venv` folder and repeat Step #3 onwards.
@@ -33,6 +33,7 @@ The [setup instructions](#setup) assumes you already have the following:
 
 5) Install the project: `pip install -e .`
    * 💡 This will install the grocery_api package locally. This is necessary to do for `pytest` to work.
+   * ✅ It should output something like, `Successfully installed grocery-api-1.0`
 
 6) Run tests in the terminal by typing, `pytest` 
    # TODO-Pre-Workshop: Update output to include testing CRUD helper functions.
@@ -61,3 +62,6 @@ The [setup instructions](#setup) assumes you already have the following:
 If you have made it all the way to the end and everything is as expected (✅), you have successfully setup your environment and ready for the workshop!
 
 If you are having trouble with any of the steps, reach out in PyLadies' Slack channel #city-hamburg.
+
+<a name="myfootnote1">1</a>: Instructions are based on MacOS but if you use Git Bash in Windows, the instructions should be fairly the same.  
+<a name="myfootnote2">2</a>: In Windows, this would be `source .venv/Scripts/activate`
