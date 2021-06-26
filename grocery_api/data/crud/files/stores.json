@@ -3,18 +3,21 @@
         "id": 1,
         "name": "Wunsch and Sons",
         "founding_year": 2010,
-        "is_active": false
+        "is_active": false,
+        "parent_company": null
     },
     "2": {
         "id": 2,
         "name": "Shanahan-Langosh",
         "founding_year": 2013,
-        "is_active": true
+        "is_active": true,
+        "parent_company": null
     },
     "3": {
         "id": 3,
         "name": "Dickens Inc",
         "founding_year": 2009,
-        "is_active": false
+        "is_active": false,
+        "parent_company": null
     }
 }
