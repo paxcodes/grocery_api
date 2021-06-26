@@ -22,6 +22,8 @@ async def create(item: schemas.ItemBase) -> schemas.ItemOut:
 
 async def read(item_id: int) -> Optional[schemas.ItemOut]:
     json_data = await _utils.read_json_data(JSON_FILE)
+    if str(item_id) not in json_data:
+        return None
     return schemas.ItemOut(**json_data[str(item_id)])
 
 
