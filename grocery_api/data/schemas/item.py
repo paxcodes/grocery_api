@@ -3,8 +3,11 @@ from typing import Set, Optional
 
 from pydantic import BaseModel
 
+# TODO-Pre-Workshop: Strip properties
+
 
 class ItemBase(BaseModel):
+    # TODO: Add properties: name, price, is_active, tags
     name: str
     price: Decimal
     is_active: bool
@@ -12,5 +15,5 @@ class ItemBase(BaseModel):
 
 
 class ItemOut(ItemBase):
-    # TODO: Add 'id' property
+    # TODO: Add property: 'id'
     id: int
