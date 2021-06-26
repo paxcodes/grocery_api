@@ -29,7 +29,9 @@ async def read(item_id: int) -> Optional[schemas.ItemOut]:
 
 async def update(item_id: int, item: schemas.ItemBase) -> Optional[schemas.ItemOut]:
     """Updates (replaces) a grocery item given a full representation of the item."""
-    pass
+    json_data = await _utils.read_json_data(JSON_FILE)
+    json_data[str(item_id)] = {**{"id": item_id}, **jsonable_encoder(item)}
+    await _utils.write_json_data(json_data, JSON_FILE)
 
 
 async def update_tags(
