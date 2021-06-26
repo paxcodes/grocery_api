@@ -141,6 +141,6 @@ async def test_delete_raises_an_exception_when_item_does_not_exist():
 
     with raises(ValueError) as exc_info:
         await item_crud.delete(given_item_id)
-        exc_msg = str(exc_info.value)
 
+    exc_msg = str(exc_info.value)
     assert f"Item {given_item_id} does not exist" in exc_msg
