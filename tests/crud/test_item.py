@@ -120,9 +120,18 @@ async def test_update_tags_returns_none_when_item_does_not_exist():
     assert actual_item is None
 
 
-async def test_it_can_delete_item_by_id(given_item: schemas.ItemOut):
-    await item_crud.delete(given_item.id)
-    actual_item = await item_crud.read(given_item.id)
+@fixture
+async def given_item_to_be_deleted() -> schemas.ItemOut:
+    item_id = 5
+    original_item = await item_crud.read(item_id)
+    assert original_item
+    yield original_item
+    await item_crud.create(original_item.copy(exclude={"id"}))
+
+
+async def test_it_can_delete_item_by_id(given_item_to_be_deleted: schemas.ItemOut):
+    await item_crud.delete(given_item_to_be_deleted.id)
+    actual_item = await item_crud.read(given_item_to_be_deleted.id)
 
     assert actual_item is None
 
