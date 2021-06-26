@@ -13,4 +13,4 @@ class ItemBase(BaseModel):
 
 class ItemOut(ItemBase):
     # TODO: Add 'id' property
-    pass
+    id: int

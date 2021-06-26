@@ -19,11 +19,11 @@ async def create(item: schemas.ItemBase) -> schemas.ItemOut:
     pass
 
 
-async def read(item_id: int) -> schemas.ItemOut:
+async def read(item_id: int) -> Optional[schemas.ItemOut]:
     pass
 
 
-async def update(item: schemas.ItemBase) -> schemas.ItemOut:
+async def update(item_id: int, item: schemas.ItemBase) -> Optional[schemas.ItemOut]:
     """Updates a grocery item given a full representation of the item.
 
     Args:
@@ -37,7 +37,9 @@ async def update(item: schemas.ItemBase) -> schemas.ItemOut:
     pass
 
 
-async def update_tags(item_id: int, tags: Optional[Set[str]]) -> schemas.ItemOut:
+async def update_tags(
+    item_id: int, tags: Optional[Set[str]]
+) -> Optional[schemas.ItemOut]:
     pass
 
 
