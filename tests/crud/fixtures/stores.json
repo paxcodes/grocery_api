@@ -1,8 +1,9 @@
 {
     "1": {
         "id": 1,
-        "name": "Sean, Pax, and Sons",
+        "name": "Sean, Pax, and Sans",
         "founding_year": 2018,
-        "is_active": true
+        "is_active": true,
+        "parent_company": null
     }
 }

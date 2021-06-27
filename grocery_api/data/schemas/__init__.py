@@ -1,5 +1,12 @@
-from .item import Item
-from .store import Store
+from .item import ItemBase, ItemOut
+from .store import StoreBase, StoreOut
 from .user import UserSensitiveData, UserOut
 
-__all__ = ["Item", "Store", "UserSensitiveData", "UserOut"]
+__all__ = [
+    "ItemBase",
+    "ItemOut",
+    "StoreBase",
+    "StoreOut",
+    "UserSensitiveData",
+    "UserOut",
+]
