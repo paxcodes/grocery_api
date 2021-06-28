@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import Dict, List, Optional, Set, TypedDict
+from typing import Dict, Optional, Set, TypedDict
 
 from fastapi.encoders import jsonable_encoder
 
