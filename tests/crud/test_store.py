@@ -29,7 +29,7 @@ async def created_store() -> store_crud.StoreOutDict:
 async def test_it_can_create_store(created_store: store_crud.StoreOutDict):
     actual_new_store = await store_crud.read(created_store['id'])
     assert actual_new_store == store_crud.StoreOutDict(
-        **{
+        {
             "id": 2,
             "name": "The Real Canadian Superstore",
             "founding_year": 1801,
@@ -42,9 +42,9 @@ async def test_it_can_create_store(created_store: store_crud.StoreOutDict):
 async def test_it_can_read_store_by_id():
     actual_store = await store_crud.read(1)
     expected_store = store_crud.StoreOutDict(
-        **{
+        {
             "id": 1,
-            "name": "Sean, Pax, and Sons",
+            "name": "Sean, Pax, and Sans",
             "founding_year": 2018,
             "is_active": True,
             "parent_company": None,
@@ -78,7 +78,7 @@ async def test_it_can_update_store(given_store: store_crud.StoreOutDict):
     await store_crud.update(given_store['id'], given_new_data)
     actual_store = await store_crud.read(given_store['id'])
     expected_store = store_crud.StoreOutDict(
-        **{
+        {
             "id": given_store['id'],
             "name": "Sean, Pax, and Sons",
             "founding_year": 2021,
