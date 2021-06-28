@@ -25,7 +25,7 @@ async def create(item: ItemDict) -> ItemOutDict:
     json_data = await _utils.read_json_data(JSON_FILE)
 
     new_id = _utils.get_new_id(json_data)
-    json_data[new_id] = ItemOutDict(id=new_id, **item)
+    json_data[new_id] = jsonable_encoder(ItemOutDict(id=new_id, **item))
 
     await _utils.write_json_data(json_data, JSON_FILE)
     return ItemOutDict(**json_data[new_id])
