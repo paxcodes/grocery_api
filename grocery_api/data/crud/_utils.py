@@ -27,3 +27,12 @@ async def read_json_data(json_file: Path) -> dict:
 async def write_json_data(json_data: dict, json_file: Path) -> None:
     async with aiofiles.open(json_file, mode="w") as f:
         await f.write(json.dumps(json_data, indent=4))
+
+
+def convert_tags_to_set(json_data: dict) -> dict:
+    serialized_data = {}
+    for id, item in json_data.items():
+        serialized_data[id] = item
+        serialized_data[id]['tags'] = set(item['tags']) if item['tags'] else None
+    return serialized_data
+    
