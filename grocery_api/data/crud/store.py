@@ -53,9 +53,9 @@ async def update(store_id: int, store: StoreDict) -> Optional[StoreOutDict]:
             name, founding_year, is_active, parent_company
 
     Returns:
-        Optional[StoreOutDict]: If store exists, returns a dictionary of updated data
-            that has keys: id, name, founding_year, is_active, parent_company.
-            Otherwise, `None`.
+        Optional[StoreOutDict]: If store exists, returns a dictionary with the
+            updated data. It will contain keys: id, name, founding_year,
+            is_active, parent_company. Otherwise, `None`.
     """
     json_data = await _utils.read_json_data(JSON_FILE)
     if str(store_id) not in json_data:
@@ -69,8 +69,20 @@ async def update(store_id: int, store: StoreDict) -> Optional[StoreOutDict]:
 async def update_parent_company(
     store_id: int, new_parent_company: Optional[str]
 ) -> Optional[StoreOutDict]:
+    """Updates parent company of store.
+
+    Args:
+        store_id (int): The store ID.
+        new_parent_company (Optional[str]): The new parent company.
+
+    Returns:
+        Optional[StoreOutDict]: If store exists, returns a dictionary with the
+            updated data. It will contain keys: id, name, founding_year,
+            is_active, parent_company. Otherwise, `None`.
+    """
     json_data = await _utils.read_json_data(JSON_FILE)
-    
+    if str(store_id) not in json_data:
+        return None
     json_data[str(store_id)]["parent_company"] = new_parent_company
     await _utils.write_json_data(json_data, JSON_FILE)
     return json_data[str(store_id)]
