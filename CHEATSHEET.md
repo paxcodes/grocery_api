@@ -6,32 +6,52 @@ POST: to create an API resource.
 GET: to read an API resource.
 PUT*: to update an API resource with a complete resource representation (e.g. completely replace it).
 PATCH*: to partially update an API resource (e.g. modify one of the fields)
-DELETE: to delete data.
+DELETE: to delete an API resource.
 
 * PATCH is less commonly used and known than PUT. Many teams also use PUT for partial updates.
 
 ## Python Types
 
-These are types relevant for the workshop. It is not an exhaustive list.
+These are types relevant for the workshop. They are all included in Python's standard library (based on Python 3.8).
 
-Built-in types: `str`, `int`, `bool`
+[Built-in types](https://docs.python.org/3/library/stdtypes.html): `str`, `int`, `bool`
 
-From the `typing` package: 
+From the [`typing` package](https://docs.python.org/3.8/library/typing.html):
 
 - `Optional` (e.g. `Optional[str]` - an optional string; can be an instance of a string or `None`)
-- `List` (e.g. `List[Item]` - a list of `Item` instances)
+- `List`* (e.g. `List[Item]` - a list of `Item` instances)
+- `Dict`** (e.g. `Dict[dict]` - a dictionary of dictionaries)
 
-From the other packages in the standard library: 
 
-- `from enum import Enum` - Limit the variable to predefined values
+\* When not specifying the type of _what is in the list_, using `list` is sufficient to use for typing.  
+** When not specifying the type of _keys and values in the dictionary_, using `dict` is sufficient to use for typing.
+
+💡 In 3.9, `List` and `Dict` are deprecated. You can use `list` and `dict` and also specify the types of their elements / keys and values.
+
+From other packages in the standard library: 
+
+- `from enum import Enum` - To limit the variable to predefined values
 - `from decimal import Decimal` - When precision is important (e.g. prices)
 
-Pydantic Types ([docs](https://pydantic-docs.helpmanual.io/usage/types/))
+### The Syntax
 
-- Email addresses (`EmailStr`) - requires [email-validator](https://github.com/JoshData/python-email-validator) to be installed as mentioned in the pydantic [docs](https://pydantic-docs.helpmanual.io/usage/types/).
+```
+[variable-name]: [type]
+```
 
-Other types from the `typing` package commonly used: 
+Examples,
 
-- `Union` (e.g. `Union[int, str]` - can be either an `int` or `str`)
-- `Literal` (e.g. `Literal["Hello World!"]` - it is always the literal string `Hello World!`)
-- `Final` (e.g. `Final[int]` - The variable is an `int` and cannot be re-assigned or overridden in a subclass)
+
+```python
+from typing import Optional
+
+
+class Item:
+    name: str
+    description: Optional[str]
+```
+
+```python
+async def add(num1: int, num2: int):
+    return num1 + num2
+```
