@@ -121,10 +121,20 @@ async def test_update_parent_company_returns_none_when_store_does_not_exist():
     assert actual_store is None
 
 
-async def test_it_can_delete_store_by_id(given_store: store_crud.StoreOutDict):
-    await store_crud.delete(given_store['id'])
-    actual_store = await store_crud.read(given_store['id'])
+@fixture
+async def given_store_to_be_deleted() -> store_crud.StoreOutDict:
+    store_id = 1
+    original_store = await store_crud.read(store_id)
+    assert original_store
+    yield original_store
+    del original_store["id"]
+    await store_crud.create(original_store)
 
+
+
+async def test_it_can_delete_store_by_id(given_store_to_be_deleted: store_crud.StoreOutDict):
+    await store_crud.delete(given_store_to_be_deleted['id'])
+    actual_store = await store_crud.read(given_store_to_be_deleted['id'])
     assert actual_store is None
 
 
