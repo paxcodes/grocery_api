@@ -62,7 +62,7 @@ async def update(item_id: int, item: ItemDict) -> Optional[ItemOutDict]:
         return None
 
     updated_item_data = ItemOutDict(id=item_id, **item)
-    json_data[str(item_id)] = updated_item_data
+    json_data[str(item_id)] = jsonable_encoder(updated_item_data)
 
     await _utils.write_json_data(json_data, JSON_FILE)
     return ItemOutDict(**updated_item_data)
