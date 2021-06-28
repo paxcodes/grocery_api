@@ -45,9 +45,21 @@ async def read(store_id: int) -> Optional[StoreOutDict]:
 
 
 async def update(store_id: int, store: StoreDict) -> Optional[StoreOutDict]:
-    """Updates (replaces) a grocery store given a full representation of the store."""
-    json_data = await _utils.read_json_data(JSON_FILE)
+    """Updates (replaces) a grocery store given a full representation of the store.
     
+    Args:
+        store_id (int): The Store ID.
+        store (StoreDict): A dictionary containing new data that has the keys:
+            name, founding_year, is_active, parent_company
+
+    Returns:
+        Optional[StoreOutDict]: If store exists, returns a dictionary of updated data
+            that has keys: id, name, founding_year, is_active, parent_company.
+            Otherwise, `None`.
+    """
+    json_data = await _utils.read_json_data(JSON_FILE)
+    if str(store_id) not in json_data:
+        return None
     json_data[str(store_id)] = StoreOutDict(id=store_id, **store)
     await _utils.write_json_data(json_data, JSON_FILE)
     return json_data[str(store_id)]
