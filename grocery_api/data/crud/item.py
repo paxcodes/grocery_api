@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import List, Optional, Set, TypedDict
+from typing import Dict, List, Optional, Set, TypedDict
 
 from fastapi.encoders import jsonable_encoder
 
@@ -9,21 +9,23 @@ from . import _utils
 
 JSON_FILE = JSON_DIRECTORY / "items.json"
 
-ItemDict = TypedDict("ItemDict", {
-    'name': str,
-    'price': Decimal,
-    'is_active': bool,
-    'tags': Optional[Set[str]]
-})
+class ItemDict(TypedDict):
+    name: str
+    price: Decimal
+    is_active: bool
+    tags: Optional[Set[str]]
+
+
 
 class ItemOutDict(ItemDict):
     id: int
+
 
 async def create(item: ItemDict) -> ItemOutDict:
     json_data = await _utils.read_json_data(JSON_FILE)
 
     new_id = _utils.get_new_id(json_data)
-    json_data[new_id] = ItemOutDict(id=new_id, **item)
+    json_data[new_id] = jsonable_encoder(ItemOutDict(id=new_id, **item))
 
     await _utils.write_json_data(json_data, JSON_FILE)
     return ItemOutDict(**json_data[new_id])
@@ -45,7 +47,7 @@ async def read(item_id: int) -> Optional[ItemOutDict]:
     return ItemOutDict(**serialized_data[str(item_id)])
 
 
-async def read_all() -> List[dict]:
+async def read_all() -> Dict[int, dict]:
     json_data = await _utils.read_json_data(JSON_FILE)
     return {
         int(id): data
@@ -60,7 +62,7 @@ async def update(item_id: int, item: ItemDict) -> Optional[ItemOutDict]:
         return None
 
     updated_item_data = ItemOutDict(id=item_id, **item)
-    json_data[str(item_id)] = updated_item_data
+    json_data[str(item_id)] = jsonable_encoder(updated_item_data)
 
     await _utils.write_json_data(json_data, JSON_FILE)
     return ItemOutDict(**updated_item_data)
