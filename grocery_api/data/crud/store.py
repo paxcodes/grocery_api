@@ -29,7 +29,18 @@ async def create(store: StoreDict) -> StoreOutDict:
 
 
 async def read(store_id: int) -> Optional[StoreOutDict]:
+    """Gets a store based on given {store_id}.
+
+    Args:
+        store_id (int): The Store ID.
+
+    Returns:
+        Optional[StoreOutDict]: If store exists, returns a dictionary with keys: id, name,
+            founding_year, is_active, parent_company. Otherwise, `None`.
+    """
     json_data = await _utils.read_json_data(JSON_FILE)
+    if str(store_id) not in json_data:
+        return None
     return json_data[str(store_id)]
 
 
