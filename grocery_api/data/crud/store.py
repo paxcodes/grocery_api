@@ -2,6 +2,9 @@ from typing import Optional, TypedDict
 
 from grocery_api.data.crud.source import JSON_DIRECTORY
 
+from . import _utils
+
+
 JSON_FILE = JSON_DIRECTORY / "stores.json"
 
 StoreDict = TypedDict("StoreDict", {
@@ -16,11 +19,18 @@ class StoreOutDict(StoreDict):
 
 
 async def create(store: StoreDict) -> StoreOutDict:
-    pass
+    json_data = await _utils.read_json_data(JSON_FILE)
+    
+    new_id = _utils.get_new_id(json_data)
+    json_data[new_id] = StoreOutDict(id=new_id, **store)
+    
+    await _utils.write_json_data(json_data, JSON_FILE)
+    return StoreOutDict(json_data[new_id])
 
 
 async def read(store_id: int) -> Optional[StoreOutDict]:
-    pass
+    json_data = await _utils.read_json_data(JSON_FILE)
+    return json_data[str(store_id)]
 
 
 async def update(store_id: int, store: StoreDict) -> Optional[StoreOutDict]:
@@ -43,4 +53,6 @@ async def delete(store_id: int) -> None:
     Raises:
         ValueError - If {store_id} does not exist.
     """
-    pass
+    json_data = await _utils.read_json_data(JSON_FILE)
+    del json_data[str(store_id)]
+    await _utils.write_json_data(json_data, JSON_FILE)
