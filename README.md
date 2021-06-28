@@ -6,9 +6,9 @@ The initial repository for PyLadies Hamburg's "Introduction to FastAPI" workshop
 
 The [setup instructions](#setup) assumes you already have the following:
 
-- Python 3.8 (3.9 works, too)
 - Git
-- A code editor (I'll be using VS Code but use whatever most convenient for you)
+- Python 3.8 (if you have an existing installation of 3.9, that works too)
+- The code editor you are most comfortable using
 
 ## Setup<sup>[1](#myfootnote1)</sup>
 
