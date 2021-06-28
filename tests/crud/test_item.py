@@ -19,7 +19,7 @@ async def created_item() -> item_crud.ItemOutDict:
         "is_active": True,
         "tags": None,
     }
-    actual_new_item = await item_crud.create(item_crud.ItemDict(**given_new_item_data))
+    actual_new_item = await item_crud.create(given_new_item_data)
     yield actual_new_item
     await item_crud.delete(actual_new_item['id'])
 
@@ -83,7 +83,7 @@ async def test_it_can_update_item(given_item: item_crud.ItemOutDict):
         "tags": None,
     }
 
-    await item_crud.update(given_item['id'], item_crud.ItemDict(**given_new_data))
+    await item_crud.update(given_item['id'], given_new_data)
     actual_item = await item_crud.read(given_item['id'])
 
     expected_item = item_crud.ItemOutDict(
