@@ -72,6 +72,7 @@ async def given_item() -> item_crud.ItemOutDict:
     original_item = await item_crud.read(item_id)
     assert original_item
     yield original_item
+    del original_item['id']
     await item_crud.update(item_id, original_item)
 
 
