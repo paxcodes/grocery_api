@@ -7,6 +7,9 @@ from pydantic import UUID4
 from grocery_api.data import schemas
 from grocery_api.data.crud.source import JSON_DIRECTORY
 
+from . import _utils
+
+
 JSON_FILE = JSON_DIRECTORY / "users.json"
 
 
@@ -22,7 +25,5 @@ async def read(user_id: UUID4) -> schemas.UserSensitiveData:
             based on response_model, let's return all attributes including sensitive
             data such as their salted & hashed password and their salt.
     """
-    async with aiofiles.open(JSON_FILE) as f:
-        file_data = await f.read()
-    json_data = json.loads(file_data)
+    json_data = await _utils.read_json_data(JSON_FILE)
     return schemas.UserSensitiveData(**json_data[str(user_id)])
