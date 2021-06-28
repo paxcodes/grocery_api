@@ -1,6 +1,5 @@
 from pytest import mark, fixture, raises
 
-from grocery_api.data import schemas
 from grocery_api.data.crud import item as item_crud
 
 from .json_dir import TEST_JSON_DIR
@@ -13,21 +12,21 @@ def test_item_json_is_successfully_mocked():
 
 
 @fixture
-async def created_item() -> schemas.ItemOut:
+async def created_item() -> item_crud.ItemOutDict:
     given_new_item_data = {
         "name": "Bananas in Pyjamas",
         "price": 400.1,
         "is_active": True,
         "tags": None,
     }
-    actual_new_item = await item_crud.create(schemas.ItemBase(**given_new_item_data))
+    actual_new_item = await item_crud.create(item_crud.ItemDict(**given_new_item_data))
     yield actual_new_item
-    await item_crud.delete(actual_new_item.id)
+    await item_crud.delete(actual_new_item['id'])
 
 
-async def test_it_can_create_item(created_item: schemas.ItemOut):
-    actual_new_item = await item_crud.read(created_item.id)
-    assert actual_new_item == schemas.ItemOut(
+async def test_it_can_create_item(created_item: item_crud.ItemOutDict):
+    actual_new_item = await item_crud.read(created_item['id'])
+    assert actual_new_item == item_crud.ItemOutDict(
         **{
             "id": 6,
             "name": "Bananas in Pyjamas",
@@ -50,7 +49,7 @@ async def test_it_can_read_all_items():
 
 async def test_it_can_read_item_by_id():
     actual_item = await item_crud.read(1)
-    expected_item = schemas.ItemOut(
+    expected_item = item_crud.ItemOutDict(
         **{
             "id": 1,
             "name": "Salt & Pax-pper",
@@ -68,7 +67,7 @@ async def test_read_returns_none_when_item_does_not_exist():
 
 
 @fixture
-async def given_item() -> schemas.ItemOut:
+async def given_item() -> item_crud.ItemOutDict:
     item_id = 1
     original_item = await item_crud.read(item_id)
     assert original_item
@@ -76,19 +75,20 @@ async def given_item() -> schemas.ItemOut:
     await item_crud.update(item_id, original_item)
 
 
-async def test_it_can_update_item(given_item: schemas.ItemOut):
+async def test_it_can_update_item(given_item: item_crud.ItemOutDict):
     given_new_data = {
         "name": "Saltz & Pax-pper",
         "price": 2.5,
         "is_active": True,
+        "tags": None,
     }
 
-    await item_crud.update(given_item.id, schemas.ItemBase(**given_new_data))
-    actual_item = await item_crud.read(given_item.id)
+    await item_crud.update(given_item['id'], item_crud.ItemDict(**given_new_data))
+    actual_item = await item_crud.read(given_item['id'])
 
-    expected_item = schemas.ItemOut(
+    expected_item = item_crud.ItemOutDict(
         **{
-            "id": given_item.id,
+            "id": given_item['id'],
             "name": "Saltz & Pax-pper",
             "price": 2.5,
             "is_active": True,
@@ -101,7 +101,7 @@ async def test_it_can_update_item(given_item: schemas.ItemOut):
 async def test_update_returns_none_when_item_does_not_exist():
     actual_item = await item_crud.update(
         100,
-        schemas.ItemBase(
+        item_crud.ItemDict(
             **{
                 "name": "Saltz & Pax-pper",
                 "price": 2.5,
@@ -112,13 +112,14 @@ async def test_update_returns_none_when_item_does_not_exist():
     assert actual_item is None
 
 
-async def test_it_can_update_item_tags(given_item: schemas.ItemOut):
+async def test_it_can_update_item_tags(given_item: item_crud.ItemOutDict):
     given_new_tags = {"pantry"}
 
-    await item_crud.update_tags(given_item.id, given_new_tags)
-    actual_item = await item_crud.read(given_item.id)
+    await item_crud.update_tags(given_item['id'], given_new_tags)
+    actual_item = await item_crud.read(given_item['id'])
 
-    expected_item = given_item.copy(update={"tags": given_new_tags})
+    expected_item = given_item.copy()
+    expected_item["tags"] = given_new_tags
     assert actual_item == expected_item
 
 
@@ -131,17 +132,18 @@ async def test_update_tags_returns_none_when_item_does_not_exist():
 
 
 @fixture
-async def given_item_to_be_deleted() -> schemas.ItemOut:
+async def given_item_to_be_deleted() -> item_crud.ItemOutDict:
     item_id = 5
     original_item = await item_crud.read(item_id)
     assert original_item
     yield original_item
-    await item_crud.create(original_item.copy(exclude={"id"}))
+    del original_item["id"]
+    await item_crud.create(original_item)
 
 
-async def test_it_can_delete_item_by_id(given_item_to_be_deleted: schemas.ItemOut):
-    await item_crud.delete(given_item_to_be_deleted.id)
-    actual_item = await item_crud.read(given_item_to_be_deleted.id)
+async def test_it_can_delete_item_by_id(given_item_to_be_deleted: item_crud.ItemOutDict):
+    await item_crud.delete(given_item_to_be_deleted['id'])
+    actual_item = await item_crud.read(given_item_to_be_deleted['id'])
 
     assert actual_item is None
 
