@@ -30,6 +30,15 @@ async def create(item: ItemDict) -> ItemOutDict:
 
 
 async def read(item_id: int) -> Optional[ItemOutDict]:
+    """Gets a item based on given {item_id}.
+
+    Args:
+        item_id (int): The item ID.
+
+    Returns:
+        Optional[ItemOutDict]: If item exists, returns a dictionary with keys: id, name,
+            price, is_active, tags. Otherwise, `None`.
+    """
     json_data = await _utils.read_json_data(JSON_FILE)
     if str(item_id) not in json_data:
         return None
