@@ -132,6 +132,6 @@ async def test_delete_raises_an_exception_when_store_does_not_exist():
 
     with raises(ValueError) as exc_info:
         await store_crud.delete(given_store_id)
-        exc_msg = str(exc_info.value)
-
+    
+    exc_msg = str(exc_info.value)
     assert f"Store {given_store_id} does not exist" in exc_msg

@@ -54,5 +54,8 @@ async def delete(store_id: int) -> None:
         ValueError - If {store_id} does not exist.
     """
     json_data = await _utils.read_json_data(JSON_FILE)
+    if str(store_id) not in json_data:
+        raise ValueError(f"Store {store_id} does not exist.")
+    
     del json_data[str(store_id)]
     await _utils.write_json_data(json_data, JSON_FILE)
