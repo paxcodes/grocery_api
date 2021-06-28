@@ -1,55 +1,81 @@
-from typing import Optional, Set
+from decimal import Decimal
+from typing import List, Optional, Set, TypedDict
 
 from fastapi.encoders import jsonable_encoder
 
-from grocery_api.data import schemas
 from grocery_api.data.crud.source import JSON_DIRECTORY
 
 from . import _utils
 
 JSON_FILE = JSON_DIRECTORY / "items.json"
 
+ItemDict = TypedDict("ItemDict", {
+    'name': str,
+    'price': Decimal,
+    'is_active': bool,
+    'tags': Optional[Set[str]]
+})
 
-async def create(item: schemas.ItemBase) -> schemas.ItemOut:
+class ItemOutDict(ItemDict):
+    id: int
+
+async def create(item: ItemDict) -> ItemOutDict:
     json_data = await _utils.read_json_data(JSON_FILE)
 
     new_id = _utils.get_new_id(json_data)
-    json_data[new_id] = {**{"id": new_id}, **jsonable_encoder(item)}
+    json_data[new_id] = ItemOutDict(id=new_id, **item)
 
     await _utils.write_json_data(json_data, JSON_FILE)
-    return schemas.ItemOut(**json_data[new_id])
+    return ItemOutDict(**json_data[new_id])
 
+async def read(item_id: int) -> Optional[ItemOutDict]:
+    """Gets a item based on given {item_id}.
 
-async def read(item_id: int) -> Optional[schemas.ItemOut]:
+    Args:
+        item_id (int): The item ID.
+
+    Returns:
+        Optional[ItemOutDict]: If item exists, returns a dictionary with keys: id, name,
+            price, is_active, tags. Otherwise, `None`.
+    """
     json_data = await _utils.read_json_data(JSON_FILE)
     if str(item_id) not in json_data:
         return None
-    return schemas.ItemOut(**json_data[str(item_id)])
+    serialized_data = _utils.convert_tags_to_set(json_data)
+    return ItemOutDict(**serialized_data[str(item_id)])
 
 
-async def update(item_id: int, item: schemas.ItemBase) -> Optional[schemas.ItemOut]:
+async def read_all() -> List[dict]:
+    json_data = await _utils.read_json_data(JSON_FILE)
+    return {
+        int(id): data
+        for id, data in json_data.items()
+    }
+
+
+async def update(item_id: int, item: ItemDict) -> Optional[ItemOutDict]:
     """Updates (replaces) a grocery item given a full representation of the item."""
     json_data = await _utils.read_json_data(JSON_FILE)
     if str(item_id) not in json_data:
         return None
 
-    updated_item_data = {**{"id": item_id}, **jsonable_encoder(item)}
+    updated_item_data = ItemOutDict(id=item_id, **item)
     json_data[str(item_id)] = updated_item_data
 
     await _utils.write_json_data(json_data, JSON_FILE)
-    return schemas.ItemOut(**updated_item_data)
+    return ItemOutDict(**updated_item_data)
 
 
 async def update_tags(
     item_id: int, tags: Optional[Set[str]]
-) -> Optional[schemas.ItemOut]:
+) -> Optional[ItemOutDict]:
     json_data = await _utils.read_json_data(JSON_FILE)
     if str(item_id) not in json_data:
         return None
 
     json_data[str(item_id)]["tags"] = jsonable_encoder(tags)
     await _utils.write_json_data(json_data, JSON_FILE)
-    return schemas.ItemOut(**json_data[str(item_id)])
+    return ItemOutDict(**json_data[str(item_id)])
 
 
 async def delete(item_id: int) -> None:
