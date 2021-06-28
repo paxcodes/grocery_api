@@ -1,4 +1,4 @@
-from typing import Optional, Set
+from typing import List, Optional, Set
 
 from fastapi.encoders import jsonable_encoder
 
@@ -25,6 +25,14 @@ async def read(item_id: int) -> Optional[schemas.ItemOut]:
     if str(item_id) not in json_data:
         return None
     return schemas.ItemOut(**json_data[str(item_id)])
+
+
+async def read_all() -> List[dict]:
+    json_data = await _utils.read_json_data(JSON_FILE)
+    return {
+        int(id): data
+        for id, data in json_data.items()
+    }
 
 
 async def update(item_id: int, item: schemas.ItemBase) -> Optional[schemas.ItemOut]:

@@ -37,6 +37,16 @@ async def test_it_can_create_item(created_item: schemas.ItemOut):
         }
     )
 
+async def test_it_can_read_all_items():
+    actual_items = await item_crud.read_all()
+    assert list(actual_items.keys()) == [1, 2, 3, 4, 5]
+    assert actual_items[1] == {
+        "id": 1,
+        "name": "Salt & Pax-pper",
+        "price": 3.1,
+        "is_active": True,
+        "tags": None
+    }
 
 async def test_it_can_read_item_by_id():
     actual_item = await item_crud.read(1)
