@@ -13,15 +13,13 @@ def test_store_json_is_successfully_mocked():
 
 @fixture
 async def created_store() -> store_crud.StoreOutDict:
-    given_new_store_data = {
-        "name": "The Real Canadian Superstore",
-        "founding_year": 1801,
-        "is_active": True,
-        "parent_company": None
-    }
     actual_new_store = await store_crud.create(
-        given_new_store_data
-    )
+        store_crud.StoreDict(
+            name="The Real Canadian Superstore",
+            founding_year=1801,
+            is_active=True,
+            parent_company=None)
+        )
     yield actual_new_store
     await store_crud.delete(actual_new_store['id'])
 
@@ -29,26 +27,22 @@ async def created_store() -> store_crud.StoreOutDict:
 async def test_it_can_create_store(created_store: store_crud.StoreOutDict):
     actual_new_store = await store_crud.read(created_store['id'])
     assert actual_new_store == store_crud.StoreOutDict(
-        {
-            "id": 2,
-            "name": "The Real Canadian Superstore",
-            "founding_year": 1801,
-            "is_active": True,
-            "parent_company": None,
-        }
+        id=2,
+        name="The Real Canadian Superstore",
+        founding_year=1801,
+        is_active=True,
+        parent_company=None,
     )
 
 
 async def test_it_can_read_store_by_id():
     actual_store = await store_crud.read(1)
     expected_store = store_crud.StoreOutDict(
-        {
-            "id": 1,
-            "name": "Sean, Pax, and Sans",
-            "founding_year": 2018,
-            "is_active": True,
-            "parent_company": None,
-        }
+        id=1,
+        name="Sean, Pax, and Sans",
+        founding_year=2018,
+        is_active=True,
+        parent_company=None,
     )
     assert actual_store == expected_store
 
@@ -64,28 +58,30 @@ async def given_store() -> store_crud.StoreOutDict:
     original_store = await store_crud.read(store_id)
     assert original_store
     yield original_store
-    del original_store['id']
-    await store_crud.update(store_id, original_store)
+    await store_crud.update(store_id, store_crud.StoreDict(
+        name=original_store["name"],
+        founding_year=original_store["founding_year"],
+        is_active=original_store["is_active"],
+        parent_company=original_store["parent_company"],
+    ))
 
 
 async def test_it_can_update_store(given_store: store_crud.StoreOutDict):
-    given_new_data = {
-        "name": "Sean, Pax, and Sons",
-        "founding_year": 2021,
-        "is_active": True,
-        "parent_company": None
-    }
+    given_new_data = store_crud.StoreDict(
+        name="Sean, Pax, and Sons",
+        founding_year=2021,
+        is_active=True,
+        parent_company=None
+    )
 
     await store_crud.update(given_store['id'], given_new_data)
     actual_store = await store_crud.read(given_store['id'])
     expected_store = store_crud.StoreOutDict(
-        {
-            "id": given_store['id'],
-            "name": "Sean, Pax, and Sons",
-            "founding_year": 2021,
-            "is_active": True,
-            "parent_company": None,
-        }
+        id=given_store['id'],
+        name="Sean, Pax, and Sons",
+        founding_year=2021,
+        is_active=True,
+        parent_company=None,
     )
     assert actual_store == expected_store
 
@@ -93,11 +89,12 @@ async def test_it_can_update_store(given_store: store_crud.StoreOutDict):
 async def test_update_returns_none_when_store_does_not_exist():
     actual_store = await store_crud.update(
         100,
-        {
-            "name": "Sean, Pax, and Sons",
-            "price": 2021,
-            "is_active": True,
-        },
+        store_crud.StoreDict(
+            name="Sean, Pax, and Sons",
+            founding_year=2021,
+            is_active=True,
+            parent_company=None
+        ),
     )
     assert actual_store is None
 
@@ -127,8 +124,12 @@ async def given_store_to_be_deleted() -> store_crud.StoreOutDict:
     original_store = await store_crud.read(store_id)
     assert original_store
     yield original_store
-    del original_store["id"]
-    await store_crud.create(original_store)
+    await store_crud.create(store_crud.StoreDict(
+        name=original_store["name"],
+        founding_year=original_store["founding_year"],
+        is_active=original_store["is_active"],
+        parent_company=original_store["parent_company"],
+    ))
 
 
 

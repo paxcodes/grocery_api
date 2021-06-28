@@ -7,12 +7,13 @@ from . import _utils
 
 JSON_FILE = JSON_DIRECTORY / "stores.json"
 
-StoreDict = TypedDict("StoreDict", {
-    'name': str,
-    'founding_year': int,
-    'is_active': bool,
-    'parent_company': Optional[str]
-})
+
+class StoreDict(TypedDict):
+    name: str
+    founding_year: int
+    is_active: bool
+    parent_company: Optional[str]
+
 
 class StoreOutDict(StoreDict):
     id: int
@@ -25,7 +26,7 @@ async def create(store: StoreDict) -> StoreOutDict:
     json_data[new_id] = StoreOutDict(id=new_id, **store)
     
     await _utils.write_json_data(json_data, JSON_FILE)
-    return StoreOutDict(json_data[new_id])
+    return StoreOutDict(**json_data[new_id])
 
 
 async def read(store_id: int) -> Optional[StoreOutDict]:

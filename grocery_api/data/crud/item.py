@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import List, Optional, Set, TypedDict
+from typing import Dict, List, Optional, Set, TypedDict
 
 from fastapi.encoders import jsonable_encoder
 
@@ -9,15 +9,17 @@ from . import _utils
 
 JSON_FILE = JSON_DIRECTORY / "items.json"
 
-ItemDict = TypedDict("ItemDict", {
-    'name': str,
-    'price': Decimal,
-    'is_active': bool,
-    'tags': Optional[Set[str]]
-})
+class ItemDict(TypedDict):
+    name: str
+    price: Decimal
+    is_active: bool
+    tags: Optional[Set[str]]
+
+
 
 class ItemOutDict(ItemDict):
     id: int
+
 
 async def create(item: ItemDict) -> ItemOutDict:
     json_data = await _utils.read_json_data(JSON_FILE)
@@ -45,7 +47,7 @@ async def read(item_id: int) -> Optional[ItemOutDict]:
     return ItemOutDict(**serialized_data[str(item_id)])
 
 
-async def read_all() -> List[dict]:
+async def read_all() -> Dict[int, dict]:
     json_data = await _utils.read_json_data(JSON_FILE)
     return {
         int(id): data

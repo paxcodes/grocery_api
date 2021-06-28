@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from pytest import mark, fixture, raises
 
 from grocery_api.data.crud import item as item_crud
@@ -13,12 +15,12 @@ def test_item_json_is_successfully_mocked():
 
 @fixture
 async def created_item() -> item_crud.ItemOutDict:
-    given_new_item_data = {
-        "name": "Bananas in Pyjamas",
-        "price": 400.1,
-        "is_active": True,
-        "tags": None,
-    }
+    given_new_item_data = item_crud.ItemDict(
+        name="Bananas in Pyjamas",
+        price=Decimal(400.1),
+        is_active=True,
+        tags=None
+    )
     actual_new_item = await item_crud.create(given_new_item_data)
     yield actual_new_item
     await item_crud.delete(actual_new_item['id'])
@@ -27,13 +29,11 @@ async def created_item() -> item_crud.ItemOutDict:
 async def test_it_can_create_item(created_item: item_crud.ItemOutDict):
     actual_new_item = await item_crud.read(created_item['id'])
     assert actual_new_item == item_crud.ItemOutDict(
-        {
-            "id": 6,
-            "name": "Bananas in Pyjamas",
-            "price": 400.1,
-            "is_active": True,
-            "tags": None,
-        }
+         id=6,
+         name="Bananas in Pyjamas",
+         price=Decimal(400.1),
+         is_active=True,
+         tags=None,
     )
 
 async def test_it_can_read_all_items():
@@ -50,13 +50,11 @@ async def test_it_can_read_all_items():
 async def test_it_can_read_item_by_id():
     actual_item = await item_crud.read(1)
     expected_item = item_crud.ItemOutDict(
-        {
-            "id": 1,
-            "name": "Salt & Pax-pper",
-            "price": 3.1,
-            "is_active": True,
-            "tags": None,
-        }
+            id=1,
+            name="Salt & Pax-pper",
+            price=Decimal(3.1),
+            is_active=True,
+            tags=None,
     )
     assert actual_item == expected_item
 
@@ -72,29 +70,31 @@ async def given_item() -> item_crud.ItemOutDict:
     original_item = await item_crud.read(item_id)
     assert original_item
     yield original_item
-    del original_item['id']
-    await item_crud.update(item_id, original_item)
+    await item_crud.update(item_id, item_crud.ItemDict(
+        name=original_item['name'],
+        price=original_item['price'],
+        is_active=original_item['is_active'],
+        tags=original_item['tags']
+    ))
 
 
 async def test_it_can_update_item(given_item: item_crud.ItemOutDict):
-    given_new_data = {
-        "name": "Saltz & Pax-pper",
-        "price": 2.5,
-        "is_active": True,
-        "tags": None,
-    }
+    given_new_data = item_crud.ItemDict(
+        name="Saltz & Pax-pper",
+        price=Decimal(2.5),
+        is_active=True,
+        tags=None,
+    )
 
     await item_crud.update(given_item['id'], given_new_data)
     actual_item = await item_crud.read(given_item['id'])
 
     expected_item = item_crud.ItemOutDict(
-        {
-            "id": given_item['id'],
-            "name": "Saltz & Pax-pper",
-            "price": 2.5,
-            "is_active": True,
-            "tags": None,
-        }
+            id=given_item['id'],
+            name="Saltz & Pax-pper",
+            price=Decimal(2.5),
+            is_active=True,
+            tags=None,
     )
     assert actual_item == expected_item
 
@@ -103,11 +103,10 @@ async def test_update_returns_none_when_item_does_not_exist():
     actual_item = await item_crud.update(
         100,
         item_crud.ItemDict(
-            {
-                "name": "Saltz & Pax-pper",
-                "price": 2.5,
-                "is_active": True,
-            }
+            name="Saltz & Pax-pper",
+            price=Decimal(2.5),
+            is_active=True,
+            tags=None
         ),
     )
     assert actual_item is None
@@ -138,8 +137,12 @@ async def given_item_to_be_deleted() -> item_crud.ItemOutDict:
     original_item = await item_crud.read(item_id)
     assert original_item
     yield original_item
-    del original_item["id"]
-    await item_crud.create(original_item)
+    await item_crud.create(item_crud.ItemDict(
+        name=original_item["name"],
+        price=original_item["price"],
+        is_active=original_item["is_active"],
+        tags=original_item["tags"],
+    ))
 
 
 async def test_it_can_delete_item_by_id(given_item_to_be_deleted: item_crud.ItemOutDict):
