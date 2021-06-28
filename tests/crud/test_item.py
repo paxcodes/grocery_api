@@ -27,7 +27,7 @@ async def created_item() -> item_crud.ItemOutDict:
 async def test_it_can_create_item(created_item: item_crud.ItemOutDict):
     actual_new_item = await item_crud.read(created_item['id'])
     assert actual_new_item == item_crud.ItemOutDict(
-        **{
+        {
             "id": 6,
             "name": "Bananas in Pyjamas",
             "price": 400.1,
@@ -50,7 +50,7 @@ async def test_it_can_read_all_items():
 async def test_it_can_read_item_by_id():
     actual_item = await item_crud.read(1)
     expected_item = item_crud.ItemOutDict(
-        **{
+        {
             "id": 1,
             "name": "Salt & Pax-pper",
             "price": 3.1,
@@ -87,7 +87,7 @@ async def test_it_can_update_item(given_item: item_crud.ItemOutDict):
     actual_item = await item_crud.read(given_item['id'])
 
     expected_item = item_crud.ItemOutDict(
-        **{
+        {
             "id": given_item['id'],
             "name": "Saltz & Pax-pper",
             "price": 2.5,
@@ -102,7 +102,7 @@ async def test_update_returns_none_when_item_does_not_exist():
     actual_item = await item_crud.update(
         100,
         item_crud.ItemDict(
-            **{
+            {
                 "name": "Saltz & Pax-pper",
                 "price": 2.5,
                 "is_active": True,
