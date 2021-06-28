@@ -46,13 +46,22 @@ async def read(store_id: int) -> Optional[StoreOutDict]:
 
 async def update(store_id: int, store: StoreDict) -> Optional[StoreOutDict]:
     """Updates (replaces) a grocery store given a full representation of the store."""
-    pass
+    json_data = await _utils.read_json_data(JSON_FILE)
+    
+    json_data[str(store_id)] = StoreOutDict(id=store_id, **store)
+    await _utils.write_json_data(json_data, JSON_FILE)
+    return json_data[str(store_id)]
+
 
 
 async def update_parent_company(
-    store_id: int, parent_company: str
+    store_id: int, new_parent_company: Optional[str]
 ) -> Optional[StoreOutDict]:
-    pass
+    json_data = await _utils.read_json_data(JSON_FILE)
+    
+    json_data[str(store_id)]["parent_company"] = new_parent_company
+    await _utils.write_json_data(json_data, JSON_FILE)
+    return json_data[str(store_id)]
 
 
 async def delete(store_id: int) -> None:

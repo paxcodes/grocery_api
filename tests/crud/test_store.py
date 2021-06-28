@@ -64,6 +64,7 @@ async def given_store() -> store_crud.StoreOutDict:
     original_store = await store_crud.read(store_id)
     assert original_store
     yield original_store
+    del original_store['id']
     await store_crud.update(store_id, original_store)
 
 
@@ -72,7 +73,7 @@ async def test_it_can_update_store(given_store: store_crud.StoreOutDict):
         "name": "Sean, Pax, and Sons",
         "founding_year": 2021,
         "is_active": True,
-        "parent_company": str
+        "parent_company": None
     }
 
     await store_crud.update(given_store['id'], given_new_data)
@@ -96,7 +97,6 @@ async def test_update_returns_none_when_store_does_not_exist():
             "name": "Sean, Pax, and Sons",
             "price": 2021,
             "is_active": True,
-            "parent_company": None
         },
     )
     assert actual_store is None
@@ -108,7 +108,8 @@ async def test_it_can_update_store_parent_company(given_store: store_crud.StoreO
     await store_crud.update_parent_company(given_store['id'], given_new_company)
     actual_store = await store_crud.read(given_store['id'])
 
-    expected_store = given_store.copy(update={"parent_company": given_new_company})
+    expected_store = given_store.copy()
+    expected_store["parent_company"] = given_new_company
     assert actual_store == expected_store
 
 
