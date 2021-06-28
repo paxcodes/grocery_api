@@ -23,11 +23,11 @@ async def created_store() -> store_crud.StoreOutDict:
         given_new_store_data
     )
     yield actual_new_store
-    await store_crud.delete(actual_new_store.id)
+    await store_crud.delete(actual_new_store['id'])
 
 
 async def test_it_can_create_store(created_store: store_crud.StoreOutDict):
-    actual_new_store = await store_crud.read(created_store.id)
+    actual_new_store = await store_crud.read(created_store['id'])
     assert actual_new_store == store_crud.StoreOutDict(
         **{
             "id": 2,
@@ -75,11 +75,11 @@ async def test_it_can_update_store(given_store: store_crud.StoreOutDict):
         "parent_company": str
     }
 
-    await store_crud.update(given_store.id, given_new_data)
-    actual_store = await store_crud.read(given_store.id)
+    await store_crud.update(given_store['id'], given_new_data)
+    actual_store = await store_crud.read(given_store['id'])
     expected_store = store_crud.StoreOutDict(
         **{
-            "id": given_store.id,
+            "id": given_store['id'],
             "name": "Sean, Pax, and Sons",
             "founding_year": 2021,
             "is_active": True,
@@ -105,8 +105,8 @@ async def test_update_returns_none_when_store_does_not_exist():
 async def test_it_can_update_store_parent_company(given_store: store_crud.StoreOutDict):
     given_new_company = "Lwaxana Dax"
 
-    await store_crud.update_parent_company(given_store.id, given_new_company)
-    actual_store = await store_crud.read(given_store.id)
+    await store_crud.update_parent_company(given_store['id'], given_new_company)
+    actual_store = await store_crud.read(given_store['id'])
 
     expected_store = given_store.copy(update={"parent_company": given_new_company})
     assert actual_store == expected_store
@@ -121,8 +121,8 @@ async def test_update_parent_company_returns_none_when_store_does_not_exist():
 
 
 async def test_it_can_delete_store_by_id(given_store: store_crud.StoreOutDict):
-    await store_crud.delete(given_store.id)
-    actual_store = await store_crud.read(given_store.id)
+    await store_crud.delete(given_store['id'])
+    actual_store = await store_crud.read(given_store['id'])
 
     assert actual_store is None
 
