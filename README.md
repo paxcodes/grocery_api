@@ -36,15 +36,17 @@ The [setup instructions](#setup) assumes you already have the following:
    * ✅ It should output something like, `Successfully installed grocery-api-1.0`
 
 6) Run tests in the terminal by typing, `pytest` 
-   # TODO-Pre-Workshop: Update output to include testing CRUD helper functions.
    * ✅ It should output,
       ```
       ...
-      collected 1 item
+      collected 24 items
 
-      tests/test_endpoints.py .     [100%]
+      tests\test_endpoints.py .                  [  4%]
+      tests\crud\test_item.py ...........        [ 50%]
+      tests\crud\test_store.py ..........        [ 91%]
+      tests\crud\test_user.py ..                 [100%]
 
-      ======== 1 passed in 0.XXs =========
+      ============== 24 passed in 0.XXs ===============
       ```
 
 7)  Run the server: `uvicorn grocery_api.main:app`
