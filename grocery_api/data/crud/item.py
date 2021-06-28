@@ -23,13 +23,21 @@ async def create(item: ItemDict) -> ItemOutDict:
     json_data = await _utils.read_json_data(JSON_FILE)
 
     new_id = _utils.get_new_id(json_data)
-    json_data[new_id] = {**{"id": new_id}, **jsonable_encoder(item)}
+    json_data[new_id] = ItemOutDict(id=new_id, **item)
 
     await _utils.write_json_data(json_data, JSON_FILE)
     return ItemOutDict(**json_data[new_id])
 
-
 async def read(item_id: int) -> Optional[ItemOutDict]:
+    """Gets a item based on given {item_id}.
+
+    Args:
+        item_id (int): The item ID.
+
+    Returns:
+        Optional[ItemOutDict]: If item exists, returns a dictionary with keys: id, name,
+            price, is_active, tags. Otherwise, `None`.
+    """
     json_data = await _utils.read_json_data(JSON_FILE)
     if str(item_id) not in json_data:
         return None
@@ -51,7 +59,7 @@ async def update(item_id: int, item: ItemDict) -> Optional[ItemOutDict]:
     if str(item_id) not in json_data:
         return None
 
-    updated_item_data = {**{"id": item_id}, **jsonable_encoder(item)}
+    updated_item_data = ItemOutDict(id=item_id, **item)
     json_data[str(item_id)] = updated_item_data
 
     await _utils.write_json_data(json_data, JSON_FILE)

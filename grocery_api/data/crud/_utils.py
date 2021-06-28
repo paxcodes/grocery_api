@@ -14,6 +14,8 @@ def get_new_id(json_data: dict) -> int:
         int: An ID a new resource can be assigned to.
     """
     keys = list(json_data.keys())
+    if not keys:
+        return 1
     last_id = int(keys.pop())
     return last_id + 1
 
