@@ -1,27 +1,36 @@
-from typing import Optional
+from typing import Optional, TypedDict
 
-from grocery_api.data import schemas
 from grocery_api.data.crud.source import JSON_DIRECTORY
 
 JSON_FILE = JSON_DIRECTORY / "stores.json"
 
+StoreDict = TypedDict("StoreDict", {
+    'name': str,
+    'founding_year': int,
+    'is_active': bool,
+    'parent_company': Optional[str]
+})
 
-async def create(store: schemas.StoreBase) -> schemas.StoreOut:
+class StoreOutDict(StoreDict):
+    id: int
+
+
+async def create(store: StoreDict) -> StoreOutDict:
     pass
 
 
-async def read(store_id: int) -> Optional[schemas.StoreOut]:
+async def read(store_id: int) -> Optional[StoreOutDict]:
     pass
 
 
-async def update(store_id: int, store: schemas.StoreBase) -> Optional[schemas.StoreOut]:
+async def update(store_id: int, store: StoreDict) -> Optional[StoreOutDict]:
     """Updates (replaces) a grocery store given a full representation of the store."""
     pass
 
 
 async def update_parent_company(
     store_id: int, parent_company: str
-) -> Optional[schemas.StoreOut]:
+) -> Optional[StoreOutDict]:
     pass
 
 
