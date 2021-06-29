@@ -29,7 +29,10 @@ The [setup instructions](#setup) assumes you already have the following:
    * ✅ Running `python --version` should output 3.8/3.9. If it isn't, delete your `.venv` folder and repeat Step #2 onwards.
 
 4) Install dependencies: `pip install -r requirements.txt`
+   * 💡 This installs fastapi, uvicorn, pytest, requests, etc. and their dependencies. When creating your own FastAPI project, you'd do `pip install fastapi` etc.
    * ✅ It should output something like, `Successfully installed ... fastapi-0.65.2 ... uvicorn-0.14.0 ... pytest-6.2.4 ... requests-2.25.1`
+   * ✅ Running `which uvicorn` or `which pytest` should output the `.venv` directory inside your `grocery_api` folder. (e.g. `/grocery_api/.venv/bin/uvicorn` and `/grocery_api/.venv/bin/pytest`)
+   
 
 5) Install the project: `pip install -e .`
    * 💡 This will install the grocery_api package locally. This is necessary to do for `pytest` to work.
