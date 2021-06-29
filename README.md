@@ -13,7 +13,7 @@ The [setup instructions](#setup) assumes you already have the following:
 ## Setup<sup>[1](#myfootnote1)</sup>
 
 1) Clone this repository  
-   a) In your terminal, execute `git clone http://github.com/paxcodes/grocery_api`  
+   a) In your terminal, execute `git clone https://github.com/paxcodes/grocery_api`  
    b) Still in the terminal, change your working directory: `cd grocery_api`
 
 2) Create the virtual environment
