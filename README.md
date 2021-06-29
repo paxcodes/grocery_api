@@ -51,10 +51,10 @@ The [setup instructions](#setup) assumes you already have the following:
 
 7)  Run the server: `uvicorn grocery_api.main:app`
    * ✅ It should say,
-    ```sh
-    INFO:     Application startup complete.
-    INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-    ```
+      ```sh
+      INFO:     Application startup complete.
+      INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+      ```
 
 8) Go to your browser and visit, http://127.0.0.1:8000
    * ✅ It should say, `{ "message": "Hello World!" }`
