@@ -26,7 +26,7 @@ The [setup instructions](#setup) assumes you already have the following:
 3) Activate your virtual environment: `source .venv/bin/activate` <sup>[2](#myfootnote2)</sup>
    * ✅ Your terminal prompt will be prefixed with `(grocery_api)` once the virtual environment is activated.
    * ✅ Running `which pip` and `which python` should output the `.venv` directory inside your `grocery_api` folder. (e.g. `/grocery_api/.venv/bin/pip` and `/grocery_api/.venv/bin/python`)
-   * ✅ Running `python --version` should output 3.8/3.9. If it isn't, delete your `.venv` folder and repeat Step #3 onwards.
+   * ✅ Running `python --version` should output 3.8/3.9. If it isn't, delete your `.venv` folder and repeat Step #2 onwards.
 
 4) Install dependencies: `pip install -r requirements.txt`
    * ✅ It should output something like, `Successfully installed ... fastapi-0.65.2 ... uvicorn-0.14.0 ... pytest-6.2.4 ... requests-2.25.1`
