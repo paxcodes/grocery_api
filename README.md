@@ -49,7 +49,7 @@ The [setup instructions](#setup) assumes you already have the following:
       ============== 24 passed in 0.XXs ===============
       ```
 
-7)  Run the server: `uvicorn grocery_api.main:app`
+7) Run the server: `uvicorn grocery_api.main:app`
    * ✅ It should say,
       ```sh
       INFO:     Application startup complete.
