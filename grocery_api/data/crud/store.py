@@ -1,4 +1,4 @@
-from typing import Optional, TypedDict
+from typing import Dict, Optional, TypedDict
 
 from grocery_api.data.crud.source import JSON_DIRECTORY
 
@@ -26,6 +26,18 @@ async def create(store: dict) -> dict:
 
     await _utils.write_json_data(json_data, JSON_FILE)
     return dict(**json_data[new_id])
+
+
+async def read_all() -> Dict[int, dict]:
+    """Returns all the stores.
+
+    Returns:
+        Dict[int, dict]: A dictionary with IDs as keys, and each value is a store
+            (a dictionary with the keys: id, name, founding_year, is_active,
+            parent_company.)
+    """
+    json_data = await _utils.read_json_data(JSON_FILE)
+    return {int(id): data for id, data in json_data.items()}
 
 
 async def read(store_id: int) -> Optional[dict]:

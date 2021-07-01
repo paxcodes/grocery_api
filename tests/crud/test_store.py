@@ -36,6 +36,18 @@ async def test_it_can_create_store(created_store: dict):
     )
 
 
+async def test_it_can_read_all_stores():
+    actual_stores = await store_crud.read_all()
+    assert list(actual_stores.keys()) == [1]
+    assert actual_stores[1] == {
+        "id": 1,
+        "name": "Sean, Pax, and Sans",
+        "founding_year": 2018,
+        "is_active": True,
+        "parent_company": None,
+    }
+
+
 async def test_it_can_read_store_by_id():
     actual_store = await store_crud.read(1)
     expected_store = dict(
