@@ -35,6 +35,5 @@ def convert_tags_to_set(json_data: dict) -> dict:
     serialized_data = {}
     for id, item in json_data.items():
         serialized_data[id] = item
-        serialized_data[id]['tags'] = set(item['tags']) if item['tags'] else None
+        serialized_data[id]["tags"] = set(item["tags"]) if item["tags"] else None
     return serialized_data
-    
