@@ -9,11 +9,11 @@ JSON_FILE = JSON_DIRECTORY / "users.json"
 
 
 # Using UUID4 doesn't do runtime type-checking here, only static type-checking.
-async def read(user_id: UUID4) -> dict:
+async def read(user_id: str) -> dict:
     """Get a user by their ID.
 
     Args:
-        user_id (UUID4): The user's ID.
+        user_id (str): The user's ID (UUID4).
 
     Returns:
         dict: A dictionary (the user) with the keys: id, email, username,
@@ -22,7 +22,7 @@ async def read(user_id: UUID4) -> dict:
             data such as their salted & hashed password and their salt.
     """
     json_data = await _utils.read_json_data(JSON_FILE)
-    return _transform_to_user_sensitive_data_dict(json_data[str(user_id)])
+    return _transform_to_user_sensitive_data_dict(json_data[user_id])
 
 
 def _transform_to_user_sensitive_data_dict(json_data: dict) -> dict:
