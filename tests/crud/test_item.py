@@ -109,21 +109,21 @@ async def test_update_returns_none_when_item_does_not_exist():
     assert actual_item is None
 
 
-async def test_it_can_update_item_tags(given_item: dict):
-    given_new_tags = {"pantry"}
+async def test_it_can_update_item_price(given_item: dict):
+    given_new_price = Decimal(540.99)
 
-    await item_crud.update_tags(given_item["id"], given_new_tags)
+    await item_crud.update_price(given_item["id"], given_new_price)
     actual_item = await item_crud.read(given_item["id"])
 
     expected_item = given_item.copy()
-    expected_item["tags"] = given_new_tags
+    expected_item["price"] = given_new_price
     assert actual_item == expected_item
 
 
-async def test_update_tags_returns_none_when_item_does_not_exist():
-    actual_item = await item_crud.update_tags(
+async def test_update_price_returns_none_when_item_does_not_exist():
+    actual_item = await item_crud.update_price(
         100,
-        {"pantry"},
+        Decimal(10_000),
     )
     assert actual_item is None
 

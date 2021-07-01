@@ -82,22 +82,22 @@ async def update(item_id: int, item: dict) -> Optional[dict]:
     return updated_item_data
 
 
-async def update_tags(item_id: int, tags: Optional[Set[str]]) -> Optional[dict]:
-    """Update the tags of the item.
+async def update_price(item_id: int, price: Decimal) -> Optional[dict]:
+    """Update the price of the item.
 
     Args:
-        item_id (int): The item ID whose tags will be updated.
-        tags (Optional[Set[str]]): The new data for the tags.
+        item_id (int): The item ID whose price will be updated.
+        price (Decimal): The new price.
 
     Returns:
-        Optional[dict]: If item exists, returns a dictionary (the item with new tags)
+        Optional[dict]: If item exists, returns a dictionary (the item with new price)
             with keys: id, name, price, is_active, tags. Otherwise, `None`.
     """
     json_data = await _utils.read_json_data(JSON_FILE)
     if str(item_id) not in json_data:
         return None
 
-    json_data[str(item_id)]["tags"] = jsonable_encoder(tags)
+    json_data[str(item_id)]["price"] = jsonable_encoder(price)
     await _utils.write_json_data(json_data, JSON_FILE)
     return dict(**json_data[str(item_id)])
 
