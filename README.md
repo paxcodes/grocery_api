@@ -45,11 +45,11 @@ The [setup instructions](#setup) assumes you already have the following:
       collected 24 items
 
       tests\test_endpoints.py .                  [  4%]
-      tests\crud\test_item.py ...........        [ 50%]
-      tests\crud\test_store.py ..........        [ 91%]
+      tests\crud\test_item.py ...........        [ 48%]
+      tests\crud\test_store.py ...........       [ 92%]
       tests\crud\test_user.py ..                 [100%]
 
-      ============== 24 passed in 0.XXs ===============
+      ============== 25 passed in 0.XXs ===============
       ```
 
 7) Run the server: `uvicorn grocery_api.main:app`
