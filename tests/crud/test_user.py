@@ -15,7 +15,7 @@ def test_user_json_is_successfully_mocked():
 
 async def test_it_can_get_user_by_id():
     actual_user = await user_crud.read(UUID4("c6fce069-4748-499d-a85d-bf310bfd534b"))
-    expected_user = user_crud.UserSensitiveDataDict(
+    expected_user = dict(
         id=UUID4("c6fce069-4748-499d-a85d-bf310bfd534b"),
         username="sons_code_not_pax",
         email="alphonse_jack@paxmargret.33mail.com",
