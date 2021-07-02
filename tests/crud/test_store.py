@@ -1,6 +1,6 @@
 from pytest import fixture, raises, mark
 
-from grocery_api.data.crud import store as store_crud
+from grocery_api.data import store as store_crud
 
 from .json_dir import TEST_JSON_DIR
 

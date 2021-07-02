@@ -2,7 +2,7 @@ from pytest import mark
 
 from pydantic import UUID4
 
-from grocery_api.data.crud import user as user_crud
+from grocery_api.data import user as user_crud
 
 from .json_dir import TEST_JSON_DIR
 

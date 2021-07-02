@@ -1,6 +1,6 @@
 from pydantic import UUID4
 
-from grocery_api.data.crud.source import JSON_DIRECTORY
+from grocery_api.data.source import JSON_DIRECTORY
 
 from . import _utils
 

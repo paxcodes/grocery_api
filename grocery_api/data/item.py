@@ -3,7 +3,7 @@ from typing import Dict, Optional, Set, TypedDict
 
 from fastapi.encoders import jsonable_encoder
 
-from grocery_api.data.crud.source import JSON_DIRECTORY
+from grocery_api.data.source import JSON_DIRECTORY
 
 from . import _utils
 

@@ -1,6 +1,6 @@
 from pytest import fixture
 
-from grocery_api.data.crud import user, store, item
+from grocery_api.data import user, store, item
 from .json_dir import TEST_JSON_DIR
 
 

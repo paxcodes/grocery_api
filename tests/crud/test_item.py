@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from pytest import mark, fixture, raises
 
-from grocery_api.data.crud import item as item_crud
+from grocery_api.data import item as item_crud
 
 from .json_dir import TEST_JSON_DIR
 
