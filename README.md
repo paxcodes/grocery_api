@@ -42,7 +42,7 @@ The [setup instructions](#setup) assumes you already have the following:
    * ✅ It should output,
       ```
       ...
-      collected 24 items
+      collected 25 items
 
       tests\test_endpoints.py .                  [  4%]
       tests\crud\test_item.py ...........        [ 48%]
