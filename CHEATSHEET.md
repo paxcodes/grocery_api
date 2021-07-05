@@ -10,6 +10,33 @@ DELETE: to delete an API resource.
 
 * PATCH is less commonly used and known than PUT. Many teams also use PUT for partial updates.
 
+## HTTP Status Codes
+
+200 [Operation Succeeded] - Operation is successful
+422 [Operation Failed] - Invalid Data / unprocessable entity
+404 [Operation Failed] - Resource not found
+
+## Data Helper Methods
+
+```python
+# To get all store resources
+store.read_all()
+
+# To get a specific store resource
+store.read(store_id)
+
+# To create a store resource
+store.create()
+```
+
+## User ID for the Workshop
+
+In the workshop, we'll create an endpoint for a user resource and test this endpoint. You'd need the User ID during this time.
+
+```
+c6fce069-4748-499d-a85d-bf310bfd534b
+```
+
 ## Python Types
 
 These are types relevant for the workshop. They are all included in Python's standard library (based on Python 3.8).
