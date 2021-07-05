@@ -2,13 +2,13 @@
 
 ## HTTP Methods
 
-POST: to create an API resource.
-GET: to read an API resource.
-PUT*: to update an API resource with a complete resource representation (e.g. completely replace it).
-PATCH*: to partially update an API resource (e.g. modify one of the fields)
-DELETE: to delete an API resource.
-
-* PATCH is less commonly used and known than PUT. Many teams also use PUT for partial updates.
+POST: to create an API resource.  
+GET: to read an API resource.  
+PUT*: to update an API resource with a complete resource representation (e.g. completely replace it).  
+PATCH*: to partially update an API resource (e.g. modify one of the fields).  
+DELETE: to delete an API resource.  
+  
+* PATCH is less commonly used and known than PUT. Many teams also use PUT for partial updates.  
 
 ## HTTP Status Codes
 
