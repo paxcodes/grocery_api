@@ -1,5 +1,12 @@
 # Quick Reference for the Workshop
 
+- [HTTP Methods](#http-methods)
+- [HTTP Status Codes](#http-status-codes)
+- [Helper Modules To Retrieve Data](#helper-modules-to-retrieve-data)
+- [User ID for the Workshop](#user-id-for-the-workshop)
+- [Python Types](#python-types)
+  - [The Syntax](#the-syntax)
+
 ## HTTP Methods
 
 POST: to create an API resource.  
