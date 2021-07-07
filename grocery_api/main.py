@@ -46,3 +46,9 @@ async def get_all_items():
     items = await item_data.read_all()
     # We return all the items.
     return items
+
+# Exercise #1: Implement an endpoint or path that gets all stores
+@app.get("/stores")
+async def get_all_stores():
+    stores = await store_data.read_all()
+    return stores
