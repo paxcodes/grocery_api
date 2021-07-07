@@ -87,12 +87,12 @@ If you are having trouble with any of the steps, reach out in PyLadies' Slack ch
 I will show how to implement 3 paths or endpoints in the FastAPI framework. A path to:
 
 1) Get all items
-2) Get a specific item given an Item ID
-3) Create an item resource
+2) Get a specific item given an Item ID (with some data validation using type-hinting)
+3) Create an item resource (with some data validation using Pydantic's `BaseModel` class + type-hinting)
 
-Attendees will have a chance after every section to create similar endpoints for the store data (e.g. Get all stores, get a specific store, etc.).
+Attendees will have a chance after every section to create similar endpoints for the store data (e.g. Get all stores, get a specific store, and create a store).
 
 If time allows, I will demonstrate:
 
-1) Validation for "outgoing" data (e.g. automatically strip sensitive data before sending data back)
+1) Validating "outgoing" data (e.g. automatically strip sensitive data before sending data back)
 2) Testing an endpoint
