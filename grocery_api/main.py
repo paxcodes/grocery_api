@@ -73,3 +73,11 @@ async def get_item_by_item_id(item_id: int):
 # Let's also use the generated documentation to interact with our API,
 # http://127.0.0.1:8000/docs > Click on the path > Click "Try it out" >
 # Specify the Item ID using the form provided.
+
+
+# Exercise #2: Implement an endpoint or path that gets a specific store
+# given a store ID.
+@app.get("/stores/{store_id}")
+async def get_store_by_store_id(store_id: int):
+    store = await store_data.read(store_id)
+    return store
