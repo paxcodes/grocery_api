@@ -2,10 +2,8 @@
 
 The initial repository for PyLadies Hamburg's "Introduction to FastAPI" workshop.
 
-⚠️ ⚠️ You must run the entire set-up **BEFORE** the workshop. The following instructions
-need to be run in a terminal (works best with bash shell). ✅ are instructions to make
-sure that everything will work expectedly during the workshop and the environment is
-setup properly.💡 are notes to explain what the step is about.
+⚠️ &nbsp; You must run the entire set-up **BEFORE** the workshop. The following instructions
+need to be run in a terminal (works best with bash shell). ✅ &nbsp; are instructions or "checklist" to make sure that the environment is setup properly.💡 &nbsp; are notes to explain what the step is about.
 
 ## Requirements
 
