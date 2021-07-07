@@ -15,18 +15,32 @@ DELETE: to delete an API resource.
 200 [Operation Succeeded] - Operation is successful  
 422 [Operation Failed] - Invalid Data / unprocessable entity  
 404 [Operation Failed] - Resource not found  
+
+To learn more about status codes and what other status codes there are, see
+the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
   
-## Data Helper Methods
+## Helper Modules To Retrieve Data
+
+These are the "helper modules" to retrieve data. We will use these inside our paths' 
+functions. They are already imported for you in `main.py`. E.g.
+
+`from grocery_api.data import store as store_data  # noqa`
+
+You can also think of these modules as our existing "backend" or
+"functionalities" which we will make accessible via the web using
+the API we will be creating with the FastAPI framework.
+
+To use them,
 
 ```python
 # To get all store resources
-store.read_all()
+store_data.read_all()
 
-# To get a specific store resource
-store.read(store_id)
+# To get a specific store resource given a store ID, store_id
+store_data.read(store_id)
 
-# To create a store resource
-store.create()
+# To create a store resource given a python dictionary, new_store_dict
+store_data.create(new_store_dict)
 ```
 
 ## User ID for the Workshop
