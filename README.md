@@ -76,7 +76,7 @@ Instructions are based on MacOS terminal but if you use Git Bash in Windows, the
 
 9) Exit the server by pressing `Ctrl+C` in the terminal.
 
-If you have made it all the way to the end and everything is as expected (✅), you have successfully setup your environment and ready for the workshop!
+If you have made it all the way to the end and everything is as expected (✅), you have successfully setup your environment and are ready for the workshop!
 
 If you are having trouble with any of the steps, reach out in PyLadies' Slack channel #city-hamburg.
 
