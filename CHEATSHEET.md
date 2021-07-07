@@ -12,10 +12,10 @@ DELETE: to delete an API resource.
 
 ## HTTP Status Codes
 
-200 [Operation Succeeded] - Operation is successful
-422 [Operation Failed] - Invalid Data / unprocessable entity
-404 [Operation Failed] - Resource not found
-
+200 [Operation Succeeded] - Operation is successful  
+422 [Operation Failed] - Invalid Data / unprocessable entity  
+404 [Operation Failed] - Resource not found  
+  
 ## Data Helper Methods
 
 ```python
