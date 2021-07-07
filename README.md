@@ -4,7 +4,7 @@ The initial repository for PyLadies Hamburg's "Introduction to FastAPI" workshop
 
 - [🔧 ⚙️ 💻 Before the workshop: Setup your computer](#-️--before-the-workshop-setup-your-computer)
   - [Part 1: Requirements](#part-1-requirements)
-  - [Part 2: Setup</sup>](#part-2-setupsup)
+  - [Part 2: Setup](#part-2-setup)
 - [What to Expect in the Workshop](#what-to-expect-in-the-workshop)
 
 ## 🔧 ⚙️ 💻 Before the workshop: Setup your computer
@@ -12,13 +12,13 @@ The initial repository for PyLadies Hamburg's "Introduction to FastAPI" workshop
 
 ### Part 1: Requirements
 
-The [setup instructions](#setup) assumes you already have the following:
+The [setup instructions](#part-2-setup) assumes you already have the following:
 
 - Git
 - Python 3.8 (if you have an existing installation of 3.9, that works too)
 - The code editor you are most comfortable using
 
-### Part 2: Setup</sup>
+### Part 2: Setup
 
 Instructions are based on MacOS terminal but if you use Git Bash in Windows, the instructions should be fairly the same.  
 
