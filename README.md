@@ -2,10 +2,15 @@
 
 The initial repository for PyLadies Hamburg's "Introduction to FastAPI" workshop.
 
-⚠️ &nbsp; You must run the entire set-up **BEFORE** the workshop. The following instructions
-need to be run in a terminal (works best with bash shell). ✅ &nbsp; are instructions or "checklist" to make sure that the environment is setup properly.💡 &nbsp; are notes to explain what the step is about.
+- [🔧 ⚙️ 💻 Before the workshop: Setup your computer](#-️--before-the-workshop-setup-your-computer)
+  - [Part 1: Requirements](#part-1-requirements)
+  - [Part 2: Setup</sup>](#part-2-setupsup)
+- [What to Expect in the Workshop](#what-to-expect-in-the-workshop)
 
-## Requirements
+## 🔧 ⚙️ 💻 Before the workshop: Setup your computer
+⚠️ &nbsp; You must run the entire set-up **BEFORE** the workshop. 
+
+### Part 1: Requirements
 
 The [setup instructions](#setup) assumes you already have the following:
 
@@ -13,7 +18,11 @@ The [setup instructions](#setup) assumes you already have the following:
 - Python 3.8 (if you have an existing installation of 3.9, that works too)
 - The code editor you are most comfortable using
 
-## Setup<sup>[1](#myfootnote1)</sup>
+### Part 2: Setup</sup>
+
+Instructions are based on MacOS terminal but if you use Git Bash in Windows, the instructions should be fairly the same.  
+
+✅ &nbsp; are instructions or "checklist" to make sure that the environment is setup properly.💡 &nbsp; are notes to explain what the step is about.
 
 1) Clone this repository  
    a) In your terminal, execute `git clone https://github.com/paxcodes/grocery_api`  
@@ -26,7 +35,7 @@ The [setup instructions](#setup) assumes you already have the following:
 
       ![.venv folder should be present](readme_assets/checklist_venv_folder.png)
 
-3) Activate your virtual environment: `source .venv/bin/activate` <sup>[2](#myfootnote2)</sup>
+3) Activate your virtual environment: `source .venv/bin/activate` <sup>[1](#myfootnote1)</sup>
    * ✅ Your terminal prompt will be prefixed with `(grocery_api)` once the virtual environment is activated.
    * ✅ Running `which pip` and `which python` should output the `.venv` directory inside your `grocery_api` folder. (e.g. `/grocery_api/.venv/bin/pip` and `/grocery_api/.venv/bin/python`)
    * ✅ Running `python --version` should output 3.8/3.9. If it isn't, delete your `.venv` folder and repeat Step #2 onwards.
@@ -71,5 +80,19 @@ If you have made it all the way to the end and everything is as expected (✅), 
 
 If you are having trouble with any of the steps, reach out in PyLadies' Slack channel #city-hamburg.
 
-<a name="myfootnote1">1</a>: Instructions are based on MacOS but if you use Git Bash in Windows, the instructions should be fairly the same.  
-<a name="myfootnote2">2</a>: In Windows, this would be `source .venv/Scripts/activate`
+<a name="myfootnote1">1</a>: In Windows, this would be `source .venv/Scripts/activate`
+
+## What to Expect in the Workshop
+
+I will show how to implement 3 paths or endpoints in the FastAPI framework. A path to:
+
+1) Get all items
+2) Get a specific item given an Item ID
+3) Create an item resource
+
+Attendees will have a chance after every section to create similar endpoints for the store data (e.g. Get all stores, get a specific store, etc.).
+
+If time allows, I will demonstrate:
+
+1) Validation for "outgoing" data (e.g. automatically strip sensitive data before sending data back)
+2) Testing an endpoint
