@@ -45,7 +45,8 @@ store_data.create(new_store_dict)
 
 ## User ID for the Workshop
 
-In the workshop, we'll create an endpoint for a user resource and test this endpoint. You'd need the User ID during this time.
+In the workshop, we'll create an endpoint for a user resource and test this endpoint.
+We'd need the User ID during this time.
 
 ```
 c6fce069-4748-499d-a85d-bf310bfd534b
