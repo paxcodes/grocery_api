@@ -27,6 +27,9 @@ from grocery_api.schemas.item import Item
 from grocery_api.schemas.store import Store
 # For PART 4: Go back to the decorator / function for the path "POST /stores"
 
+# PART 2 OF HOW-TO #4 VALIDATE OUTGOING DATA: Import the pydantic schema
+from grocery_api.schemas.user import UserOut
+
 app = FastAPI()
 
 
@@ -147,3 +150,19 @@ async def create_a_store(store: Store):
 #   "is_active": true
 # }
 #
+
+
+# HOW-TO #4: Validate (automatically strip) outgoing data
+#
+# PART 1: Using the `response_model` keyword argument
+# To ensure that data going out of this endpoint follows a certain schema,
+# use the keyword argument `response_model`. In this case, we are using
+# the schema `UserOut` which only contains non-sensitive info such as id,
+# username, and email. Sensitive info such as "password" and "salt"
+# are not included.
+#
+# See grocery_api/schemas/user.py for the implementation of the UserOut schema.
+@app.get("/users/{user_id}", response_model=UserOut)
+async def get_user_by_user_id(user_id: str):
+    user = await user_data.read(user_id)
+    return user
