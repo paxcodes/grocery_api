@@ -15,7 +15,7 @@ PUT*: to update an API resource with a complete resource representation (e.g. co
 PATCH*: to partially update an API resource (e.g. modify one of the fields).  
 DELETE: to delete an API resource.  
   
-* PATCH is less commonly used and known than PUT. Many teams also use PUT for partial updates.  
+\* PATCH is less commonly used and known than PUT. Many teams also use PUT for partial updates.  
 
 ## HTTP Status Codes
 
