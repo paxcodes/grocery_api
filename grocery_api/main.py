@@ -23,6 +23,10 @@ from grocery_api.data import user as user_data  # noqa
 from grocery_api.schemas.item import Item
 # For PART 4: Go back to the decorator / function for the path "POST /items"
 
+# PART 3 OF EXERCISE #3 CREATE A NEW STORE: Import the pydantic schema we created
+from grocery_api.schemas.store import Store
+# For PART 4: Go back to the decorator / function for the path "POST /stores"
+
 app = FastAPI()
 
 
@@ -122,4 +126,24 @@ async def create_an_item(item: Item):
 #
 # Press "Execute". "Server Response" should be "Code 200" and the
 # "Response Body" is the new item created.
+
+
+# EXERCISE #3: CREATE A STORE
+# PART 1: Define the path and the path's function
+@app.post("/stores")
+# Go to grocery_api/schemas/store.py for "PART 2: Create the schema"
+#
+# PART 4: Use the schema to type-hint `store` and complete the function.
+async def create_a_store(store: Store):
+    new_store = await store_data.create(store.dict())
+    return new_store
+# Use the generated documentation to interact with our API,
+# http://127.0.0.1:8000/docs > Click on POST /stores > Click "Try it out" >
+# Fill out the request body. E.g.,
+#
+# {
+#   "name": "My Company",
+#   "founding_year": 1990,
+#   "is_active": true
+# }
 #
