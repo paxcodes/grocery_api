@@ -52,3 +52,24 @@ async def get_all_items():
 async def get_all_stores():
     stores = await store_data.read_all()
     return stores
+
+
+# HOW-TO #2: Implement an endpoint or path that gets a specific item
+# given an item ID.
+#
+# Specify "path parameters" (in this case, item_id) using curly braces.
+@app.get("/items/{item_id}")
+# For a function parameter to be recognized by FastAPI as the path parameter
+# we specified in our decorator, it should have the same name. In this case,
+# item_id. We also type-hinted it to be an integer.
+async def get_item_by_item_id(item_id: int):
+    # Call the read() method of our `item_data` module.
+    item = await item_data.read(item_id)
+    return item
+# In your browser, try visiting this path with a string for "item_id"
+# (e.g. `http://127.0.0.1:8000/items/foo`) and you'll see that FastAPI
+# returns a handy error message out-of-the-box.
+#
+# Let's also use the generated documentation to interact with our API,
+# http://127.0.0.1:8000/docs > Click on the path > Click "Try it out" >
+# Specify the Item ID using the form provided.
