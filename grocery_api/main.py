@@ -26,3 +26,23 @@ app = FastAPI()
 @app.get("/")
 async def get_home():
     return {"message": "Hello World!"}
+
+
+# HOW-TO #1: Implement an endpoint or path that gets all items
+#
+# We use python's decorator syntax `@`, then the FastAPI instance `app`
+# then the method `get` (since this path is for RETRIEVING / GETTING a resource,
+# the HTTP method GET is what's appropriate to use),
+# then specifying the path we are implementing, "/items"
+@app.get("/items")
+# Immediately below the decorator is the function that will have
+# the logic we want to execute when users (clients) of our API makes
+# a request to the path we just defined through the decorator (in this case,
+# a GET request to the /items path).
+async def get_all_items():
+    # Call the read_all() function of our `item_data` module (part of our
+    # existing backend). For more info about these modules, see comment on
+    # the top section of this file.
+    items = await item_data.read_all()
+    # We return all the items.
+    return items
