@@ -19,6 +19,9 @@ from grocery_api.data import item as item_data  # noqa
 from grocery_api.data import store as store_data  # noqa
 from grocery_api.data import user as user_data  # noqa
 
+# PART 3 OF HOW-TO #3 CREATE A NEW ITEM: Import the pydantic schema we created
+from grocery_api.schemas.item import Item
+# For PART 4: Go back to the decorator / function for the path "POST /items"
 
 app = FastAPI()
 
@@ -81,3 +84,42 @@ async def get_item_by_item_id(item_id: int):
 async def get_store_by_store_id(store_id: int):
     store = await store_data.read(store_id)
     return store
+
+# HOW-TO #3: Implement an endpoint that CREATES AN ITEM
+#
+# PART 1: Defining the endpoint
+#
+# The appropriate HTTP method to use when _creating_ a new resource
+# (in this case, creating a new item) is POST.
+@app.post("/items")
+# The data for the new item will be in the "request body". As explained in
+# the slides, "request body" is where clients will put the data needed for the
+# request. In this case, the data that's needed for creating a new item is the
+# new item's properties like "name", "price", etc.
+#
+# To validate this incoming data, we will create a "pydantic schema."
+# Go to grocery_api/schemas/item.py for "PART 2: Create the schema"
+#
+# PART 4: Use the schema to type-hint `item` and complete the function.
+#
+# FastAPI recognizes that the function parameter, `item` is referring to
+# data in the "request body" because it is type-hinted as a "pydantic schema."
+async def create_an_item(item: Item):
+    # Call item_data.create(). Since the create() method is asking for a
+    # dictionary, we use pydantic.BaseModel's built-in method dict() to
+    # export the schema `item` into a regular python dictionary.
+    new_item = await item_data.create(item.dict())
+    return new_item
+# Use the generated documentation to interact with our API,
+# http://127.0.0.1:8000/docs > Click on "POST /items" > Click "Try it out" >
+# Fill out the request body. E.g.,
+#
+# {
+#   "name": "Bananas",
+#   "price": 10,
+#   "is_active": true
+# }
+#
+# Press "Execute". "Server Response" should be "Code 200" and the
+# "Response Body" is the new item created.
+#
