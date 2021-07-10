@@ -6,6 +6,7 @@
 - [User ID for the Workshop](#user-id-for-the-workshop)
 - [Python Types](#python-types)
   - [The Syntax](#the-syntax)
+- [How-To's and Solutions to Exercises](#how-tos-and-solutions-to-exercises)
 
 ## HTTP Methods
 
@@ -104,3 +105,13 @@ class Item:
 async def add(num1: int, num2: int):
     return num1 + num2
 ```
+
+## How-To's and Solutions to Exercises
+
+In the [`how_tos_and_exercises` branch](https://github.com/paxcodes/grocery_api/commits/how_tos_and_exercises), you will see the code we will go through during the workshop along with the explanation behind them. This is helpful when you have to be away for a while and may have missed something during the workshop.
+
+![](./readme_assets/how_to_link.png)
+
+![](./readme_assets/how_to_code.png)
+
+You will also see solutions to the exercises (those with "EXERCISE" in the beginning of the commit message) in case you get stuck or don't have enough time to finish the exercises.
